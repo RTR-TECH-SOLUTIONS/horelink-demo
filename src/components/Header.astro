@@ -1,0 +1,309 @@
+---
+import { t, LANGS, base, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang);
+
+const links = [
+  { href: "#cum-functioneaza", label: d.nav.cum },
+  { href: "#personal", label: d.nav.personal },
+  { href: "#angajatori", label: d.nav.angajatori },
+  { href: "#evenimente", label: d.nav.evenimente },
+  { href: "#contact", label: d.nav.contact },
+];
+---
+
+<header class="site-header on-dark" data-header>
+  <div class="wrap header-inner">
+    <a href={base(lang)} class="brand" aria-label={d.a11y.brandHome}>
+      <img src={url("/app/mark.png")} alt="" width="36" height="36" />
+      <span>HoreLink</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label={d.a11y.mainNav}>
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="lang" role="group" aria-label={d.a11y.langSwitch}>
+      {
+        LANGS.map((l) =>
+          l === lang ? (
+            <span aria-current="true">{t(l).short}</span>
+          ) : (
+            <a href={base(l)} hreflang={l} lang={l}>
+              {t(l).short}
+            </a>
+          ),
+        )
+      }
+    </div>
+
+    <a href="#descarca" class="btn btn-primary header-cta">{d.nav.cta}</a>
+
+    <button
+      type="button"
+      class="burger"
+      data-burger
+      aria-label={d.a11y.openMenu}
+      data-label-open={d.a11y.openMenu}
+      data-label-close={d.a11y.closeMenu}
+      aria-expanded="false"
+      aria-controls="meniu-mobil"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-panel" id="meniu-mobil" data-panel hidden>
+    <nav aria-label={d.a11y.mobileNav}>
+      {links.map((l) => <a href={l.href} data-panel-link>{l.label}</a>)}
+    </nav>
+    <a href="#descarca" class="btn btn-primary" data-panel-link>{d.nav.cta}</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: 60;
+    padding-block-start: env(safe-area-inset-top, 0px);
+    background: transparent;
+    transition:
+      background-color 220ms var(--ease),
+      border-color 220ms var(--ease);
+    border-block-end: 1px solid transparent;
+  }
+
+  .site-header.is-stuck,
+  .site-header.is-open {
+    background: color-mix(in srgb, var(--color-ink) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-block-end-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .header-inner {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-inline-end: auto;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.22rem;
+    letter-spacing: -0.02em;
+  }
+
+  .brand img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .desktop-nav {
+    display: none;
+    gap: 1.7rem;
+    margin-inline-end: 0.5rem;
+  }
+
+  .desktop-nav a {
+    position: relative;
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding-block: 0.4rem;
+    transition: color 180ms var(--ease);
+  }
+
+  .desktop-nav a::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    height: 2px;
+    width: 0;
+    background: var(--color-brand);
+    transition: width 200ms var(--ease);
+  }
+
+  .desktop-nav a:hover {
+    color: #fff;
+  }
+
+  .desktop-nav a:hover::after {
+    width: 100%;
+  }
+
+  /* --- comutator de limba --- */
+  .lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+  }
+
+  .lang > * {
+    padding: 0.32rem 0.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .lang span[aria-current] {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .lang a {
+    color: rgba(255, 255, 255, 0.55);
+    transition:
+      color 180ms var(--ease),
+      background-color 180ms var(--ease);
+  }
+
+  .lang a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .header-cta {
+    display: none;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.9rem;
+  }
+
+  /* --- hamburger --- */
+  .burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 9px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .burger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition:
+      transform 220ms var(--ease),
+      opacity 160ms var(--ease);
+  }
+
+  .site-header.is-open .burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .site-header.is-open .burger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-header.is-open .burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* --- panou mobil --- */
+  .mobile-panel {
+    border-block-start: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-ink);
+    padding: 1.25rem 20px calc(1.75rem + env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+  }
+
+  .mobile-panel nav {
+    display: grid;
+    margin-block-end: 1.25rem;
+  }
+
+  .mobile-panel nav a {
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.28rem;
+    letter-spacing: -0.02em;
+    padding-block: 0.85rem;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .mobile-panel > .btn {
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-nav,
+    .header-cta {
+      display: inline-flex;
+    }
+
+    .burger,
+    .mobile-panel {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  const burger = document.querySelector<HTMLButtonElement>("[data-burger]");
+  const panel = document.querySelector<HTMLElement>("[data-panel]");
+
+  if (header && burger && panel) {
+    const setOpen = (open: boolean) => {
+      header.classList.toggle("is-open", open);
+      panel.hidden = !open;
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute(
+        "aria-label",
+        (open ? burger.dataset.labelClose : burger.dataset.labelOpen) ?? "",
+      );
+    };
+
+    burger.addEventListener("click", () => setOpen(panel.hidden));
+
+    panel.querySelectorAll("[data-panel-link]").forEach((link) => {
+      link.addEventListener("click", () => setOpen(false));
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !panel.hidden) {
+        setOpen(false);
+        burger.focus();
+      }
+    });
+
+    // panoul ramane deschis daca treci pe desktop, deci il inchidem la resize
+    window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+      if (e.matches) setOpen(false);
+    });
+
+    const onScroll = () => header.classList.toggle("is-stuck", window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+</script>

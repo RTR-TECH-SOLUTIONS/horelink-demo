@@ -1,0 +1,183 @@
+---
+import { t, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).cum;
+const pasi = { personal: d.personal, angajator: d.angajator };
+---
+
+<section class="section" id="cum-functioneaza">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>{d.title}</h2>
+      <p>{d.intro}</p>
+    </div>
+
+    <div class="switch reveal" role="tablist" aria-label={d.tablistLabel}>
+      <button
+        type="button"
+        role="tab"
+        id="tab-personal"
+        aria-controls="panel-personal"
+        aria-selected="true"
+        data-tab="personal"
+        class="is-active"
+      >
+        {d.tabPersonal}
+      </button>
+      <button
+        type="button"
+        role="tab"
+        id="tab-angajator"
+        aria-controls="panel-angajator"
+        aria-selected="false"
+        tabindex="-1"
+        data-tab="angajator"
+      >
+        {d.tabAngajator}
+      </button>
+    </div>
+
+    {
+      (["personal", "angajator"] as const).map((cheie) => (
+        <div
+          class="steps reveal"
+          id={`panel-${cheie}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${cheie}`}
+          data-panel-step={cheie}
+          hidden={cheie !== "personal"}
+        >
+          {pasi[cheie].map((pas, i) => (
+            <article class="step">
+              <span class="num">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{pas.titlu}</h3>
+              <p>{pas.text}</p>
+            </article>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .head {
+    max-width: 42rem;
+    margin-block-end: 2.5rem;
+  }
+
+  .head p {
+    margin-block-start: 1rem;
+    font-size: 1.06rem;
+    color: var(--color-slate);
+    max-width: 34rem;
+  }
+
+  /* --- comutatorul de audienta --- */
+  .switch {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--color-paper-2);
+    border-radius: 11px;
+    margin-block-end: 3rem;
+  }
+
+  .switch button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    border-radius: 8px;
+    padding: 0.65rem 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    color: var(--color-slate);
+    cursor: pointer;
+    transition:
+      background-color 180ms var(--ease),
+      color 180ms var(--ease);
+  }
+
+  .switch button:hover {
+    color: var(--color-graphite);
+  }
+
+  .switch button.is-active {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  /* --- pasii --- */
+  .steps {
+    display: grid;
+    gap: 2.5rem 2.75rem;
+  }
+
+  @media (min-width: 820px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .step {
+    position: relative;
+    padding-block-start: 1.5rem;
+    border-block-start: 2px solid var(--color-graphite);
+  }
+
+  .num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.86rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-brand);
+    margin-block-end: 0.7rem;
+  }
+
+  .step h3 {
+    margin-block-end: 0.6rem;
+  }
+
+  .step p {
+    color: var(--color-slate);
+    line-height: 1.62;
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>("[data-tab]");
+  const panels = document.querySelectorAll<HTMLElement>("[data-panel-step]");
+
+  const select = (cheie: string) => {
+    tabs.forEach((t) => {
+      const on = t.dataset.tab === cheie;
+      t.classList.toggle("is-active", on);
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach((p) => {
+      p.hidden = p.dataset.panelStep !== cheie;
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => select(tab.dataset.tab!));
+    // sageti stanga/dreapta, cum se asteapta de la un tablist
+    tab.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const list = [...tabs];
+      const next = list[(list.indexOf(tab) + 1) % list.length];
+      select(next.dataset.tab!);
+      next.focus();
+    });
+  });
+</script>

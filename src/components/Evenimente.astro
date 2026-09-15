@@ -1,0 +1,178 @@
+---
+import { t, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).evenimente;
+
+// Tipurile sunt exact cele enumerate de aplicatie in descrierea din magazine.
+const slugs = ["nunta", "craciun", "conferinta", "rooftop", "festival", "restaurant"] as const;
+---
+
+<section class="section evenimente" id="evenimente">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>{d.title}</h2>
+      <p>{d.intro}</p>
+    </div>
+
+    <ul class="galerie">
+      {
+        slugs.map((slug) => (
+          <li class="item reveal">
+            <figure>
+              <img
+                src={url(`/img/ev-${slug}-760.webp`)}
+                srcset={`${url(`/img/ev-${slug}-520.webp`)} 520w, ${url(`/img/ev-${slug}-760.webp`)} 760w`}
+                sizes="(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw"
+                alt={d.items[slug].alt}
+                width="760"
+                height="950"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <h3>{d.items[slug].nume}</h3>
+                <p>{d.items[slug].text}</p>
+              </figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .evenimente {
+    background: var(--color-paper);
+  }
+
+  .head {
+    max-width: 42rem;
+    margin-block-end: 3rem;
+  }
+
+  .head p {
+    margin-block-start: 1rem;
+    font-size: 1.06rem;
+    color: var(--color-slate);
+    max-width: 34rem;
+  }
+
+  .galerie {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .galerie {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .galerie {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem 1.75rem;
+    }
+
+    /* coloana din mijloc coboara: rupe grila perfecta fara sa taie nimic */
+    .item:nth-child(3n + 2) {
+      margin-block-start: 3.5rem;
+    }
+  }
+
+  .item {
+    margin: 0;
+  }
+
+  figure {
+    position: relative;
+    margin: 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--color-ink);
+    isolation: isolate;
+  }
+
+  /* raportul cadrului e acelasi cu al fotografiei, deci nu se taie nimic */
+  figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: saturate(0.94);
+    transform: scale(1.001);
+    transition:
+      transform 620ms var(--ease),
+      filter 400ms var(--ease);
+  }
+
+  /* voalul: acelasi limbaj ca hero-ul si sectiunea pentru personal */
+  figure::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(8, 8, 9, 0.92) 0%,
+      rgba(8, 8, 9, 0.72) 22%,
+      rgba(8, 8, 9, 0.28) 46%,
+      rgba(8, 8, 9, 0.04) 68%
+    );
+    transition: opacity 400ms var(--ease);
+  }
+
+  figcaption {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 1;
+    padding: 1.5rem 1.4rem 1.5rem;
+    color: #fff;
+  }
+
+  /* firul rosu: singurul accent de culoare din sectiune */
+  figcaption::before {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--color-brand);
+    margin-block-end: 0.85rem;
+    transition: width 400ms var(--ease);
+  }
+
+  figcaption h3 {
+    font-size: clamp(1.14rem, 1.02rem + 0.4vw, 1.32rem);
+    color: #fff;
+  }
+
+  figcaption p {
+    margin-block-start: 0.45rem;
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  @media (hover: hover) {
+    .item:hover figure img {
+      transform: scale(1.045);
+      filter: saturate(1.02);
+    }
+
+    .item:hover figcaption::before {
+      width: 46px;
+    }
+  }
+</style>

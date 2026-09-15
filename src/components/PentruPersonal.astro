@@ -1,0 +1,136 @@
+---
+import Phone from "./Phone.astro";
+import StoreBadges from "./StoreBadges.astro";
+import { t, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).personal;
+---
+
+<section class="personal on-dark" id="personal">
+  <img
+    class="bg"
+    src={url("/img/personal-1000.webp")}
+    alt=""
+    width="1000"
+    height="664"
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div class="wrap grid">
+    <div class="copy reveal">
+      <h2>{d.titlePre}<span class="accent">{d.titleAccent}</span>{d.titlePost}</h2>
+      <p class="lede">{d.lede}</p>
+
+      <ul class="ticks">
+        {
+          d.bullets.map((b) => (
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="M4 10.5 8 14.5 16 5.5"
+                  stroke="#e00216"
+                  stroke-width="2.4"
+                  stroke-linecap="square"
+                />
+              </svg>
+              <span>{b}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <StoreBadges lang={lang} class="badges" />
+    </div>
+
+    <div class="visual reveal">
+      <Phone src={url("/app/screen-detaliu.webp")} alt={d.phoneAlt} width={840} height={1706} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .personal {
+    position: relative;
+    background: var(--color-ink);
+    color: #fff;
+    padding-block: clamp(4rem, 2.5rem + 6vw, 7.5rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .bg {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 62%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+  }
+
+  .personal::after {
+    /* fotografia ramane doar o atmosfera in spate, nu concureaza textul */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to right,
+      var(--color-ink) 0%,
+      var(--color-ink) 30%,
+      rgba(10, 10, 11, 0.82) 48%,
+      rgba(10, 10, 11, 0.42) 76%,
+      rgba(10, 10, 11, 0.3) 100%
+    );
+  }
+
+  .grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 4rem;
+    }
+  }
+
+  .copy {
+    max-width: 38rem;
+  }
+
+  .lede {
+    margin-block: 1.25rem 2rem;
+    font-size: 1.06rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .ticks {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .badges {
+    margin-block-start: 2.4rem;
+  }
+
+  .visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 900px) {
+    .visual {
+      justify-content: flex-end;
+    }
+  }
+</style>

@@ -1,0 +1,136 @@
+---
+import Phone from "./Phone.astro";
+import StoreBadges from "./StoreBadges.astro";
+import { t, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).angajatori;
+---
+
+<section class="angajatori" id="angajatori">
+  <div class="wrap grid">
+    <div class="visual reveal">
+      <Phone src={url("/app/screen-lista.webp")} alt={d.phoneAlt} width={840} height={1495} />
+      <img
+        class="photo"
+        src={url("/img/angajatori-1000.webp")}
+        alt={d.photoAlt}
+        width="1000"
+        height="664"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="copy reveal">
+      <h2>{d.titlePre}<span class="accent">{d.titleAccent}</span></h2>
+      <p class="lede">{d.lede}</p>
+
+      <ul class="ticks">
+        {
+          d.bullets.map((b) => (
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="M4 10.5 8 14.5 16 5.5"
+                  stroke="#e00216"
+                  stroke-width="2.4"
+                  stroke-linecap="square"
+                />
+              </svg>
+              <span>{b}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <StoreBadges lang={lang} class="badges" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .angajatori {
+    background: var(--color-paper);
+    padding-block: clamp(4rem, 2.5rem + 6vw, 7.5rem);
+  }
+
+  .grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .grid {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 4.5rem;
+    }
+  }
+
+  /* telefonul se suprapune peste coltul fotografiei, ca sa nu para
+     doua dreptunghiuri puse unul langa altul */
+  .visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-block-end: 2rem;
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-card);
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  .visual :global(.phone) {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    z-index: 2;
+    width: min(190px, 40vw);
+  }
+
+  @media (min-width: 900px) {
+    .visual {
+      padding-block-end: 3.5rem;
+    }
+
+    /* fotografia se retrage din stanga, ca telefonul sa aiba unde sta
+       peste coltul ei fara sa-i acopere subiectul */
+    .photo {
+      width: calc(100% - 88px);
+      margin-inline-start: 88px;
+      aspect-ratio: 5 / 4;
+    }
+
+    .visual :global(.phone) {
+      width: min(224px, 21vw);
+    }
+  }
+
+  .copy {
+    max-width: 38rem;
+  }
+
+  .lede {
+    margin-block: 1.25rem 2rem;
+    font-size: 1.06rem;
+    color: var(--color-slate);
+  }
+
+  .ticks {
+    color: var(--color-graphite);
+  }
+
+  .badges {
+    margin-block-start: 2.4rem;
+  }
+</style>

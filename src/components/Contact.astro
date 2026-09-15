@@ -1,0 +1,306 @@
+---
+import { t, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).contact;
+---
+
+<section class="section contact" id="contact">
+  <div class="wrap grid">
+    <div class="copy reveal">
+      <h2>{d.title}</h2>
+      <p class="lede">{d.lede}</p>
+
+      <ul class="direct">
+        {
+          d.direct.map((item) => (
+            <li>
+              <span>{item.eticheta}</span>
+              <strong>{item.valoare}</strong>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <form
+      class="form reveal"
+      data-form
+      novalidate
+      data-wa-greeting={d.waGreeting}
+      data-wa-personal={d.waRolPersonal}
+      data-wa-angajator={d.waRolAngajator}
+      data-wa-footer={d.waFooter}
+      data-status-text={d.status}
+    >
+      <div class="field">
+        <label for="nume">{d.numeLabel}</label>
+        <input id="nume" name="nume" type="text" autocomplete="name" required />
+        <p class="err" data-err-for="nume" hidden>{d.numeError}</p>
+      </div>
+
+      <fieldset class="field">
+        <legend>{d.rolLabel}</legend>
+        <div class="radios">
+          <label class="radio">
+            <input type="radio" name="rol" value="personal" checked />
+            <span>{d.rolPersonal}</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="rol" value="angajator" />
+            <span>{d.rolAngajator}</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="mesaj">{d.mesajLabel}</label>
+        <textarea id="mesaj" name="mesaj" rows="4" required></textarea>
+        <p class="err" data-err-for="mesaj" hidden>{d.mesajError}</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        {d.submit}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.34 4.95L2 22l5.23-1.37a9.9 9.9 0 0 0 4.8 1.23h.01c5.5 0 9.96-4.46 9.96-9.96 0-2.66-1.04-5.16-2.92-7.04A9.9 9.9 0 0 0 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.1.81.83-3.03-.2-.31a8.24 8.24 0 0 1 12.8-10.2 8.18 8.18 0 0 1 2.42 5.83c0 4.56-3.7 8.23-8.25 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-2-1.23a7.4 7.4 0 0 1-1.37-1.7c-.14-.25-.02-.38.11-.5.11-.12.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.48c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.54c.13.17 1.74 2.65 4.2 3.72.59.25 1.05.4 1.4.52.59.18 1.13.16 1.55.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z"
+          ></path>
+        </svg>
+      </button>
+
+      <p class="status" data-status role="status" aria-live="polite"></p>
+      <p class="fine">{d.fine}</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--color-paper-2);
+  }
+
+  .grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 4.5rem;
+      align-items: start;
+    }
+  }
+
+  .lede {
+    margin-block: 1.1rem 2rem;
+    color: var(--color-slate);
+    font-size: 1.06rem;
+    max-width: 30rem;
+  }
+
+  .direct {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    max-width: 24rem;
+  }
+
+  .direct li {
+    display: grid;
+    gap: 0.15rem;
+    padding-block-end: 1rem;
+    border-block-end: 1px solid rgba(23, 23, 26, 0.12);
+  }
+
+  .direct span {
+    font-size: 0.83rem;
+    color: var(--color-slate);
+  }
+
+  .direct strong {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* --- formular --- */
+  .form {
+    display: grid;
+    gap: 1.35rem;
+    background: var(--color-paper);
+    border: 1px solid rgba(23, 23, 26, 0.1);
+    border-radius: 14px;
+    padding: clamp(1.4rem, 1rem + 1.6vw, 2.25rem);
+  }
+
+  .field {
+    display: grid;
+    gap: 0.45rem;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+
+  label,
+  legend {
+    font-size: 0.87rem;
+    font-weight: 500;
+    color: var(--color-graphite);
+    padding: 0;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--color-graphite);
+    background: #fff;
+    border: 1px solid rgba(23, 23, 26, 0.2);
+    border-radius: var(--radius-btn);
+    padding: 0.72rem 0.85rem;
+    transition:
+      border-color 180ms var(--ease),
+      box-shadow 180ms var(--ease);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 7rem;
+    line-height: 1.55;
+  }
+
+  input[type="text"]:hover,
+  textarea:hover {
+    border-color: rgba(23, 23, 26, 0.36);
+  }
+
+  input[aria-invalid="true"],
+  textarea[aria-invalid="true"] {
+    border-color: var(--color-brand);
+  }
+
+  .radios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-block-start: 0.15rem;
+  }
+
+  .radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff;
+    border: 1px solid rgba(23, 23, 26, 0.2);
+    border-radius: var(--radius-btn);
+    padding: 0.6rem 0.85rem;
+    font-size: 0.94rem;
+    cursor: pointer;
+    transition:
+      border-color 180ms var(--ease),
+      background-color 180ms var(--ease);
+  }
+
+  .radio:hover {
+    border-color: rgba(23, 23, 26, 0.4);
+  }
+
+  .radio:has(input:checked) {
+    border-color: var(--color-ink);
+    background: #fff;
+  }
+
+  .radio input {
+    accent-color: var(--color-brand);
+    width: 1.05rem;
+    height: 1.05rem;
+    margin: 0;
+  }
+
+  .err {
+    font-size: 0.85rem;
+    color: var(--color-brand);
+  }
+
+  .form .btn {
+    justify-self: start;
+  }
+
+  .status:empty {
+    display: none;
+  }
+
+  .status {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-graphite);
+    background: #fff;
+    border: 1px solid rgba(23, 23, 26, 0.12);
+    border-radius: var(--radius-btn);
+    padding: 0.7rem 0.85rem;
+  }
+
+  .fine {
+    font-size: 0.83rem;
+    color: var(--color-slate);
+  }
+</style>
+
+<script>
+  import { WHATSAPP } from "../data/app";
+
+  const form = document.querySelector<HTMLFormElement>("[data-form]");
+  const status = document.querySelector<HTMLElement>("[data-status]");
+
+  if (form && status) {
+    const showError = (name: string, show: boolean) => {
+      const input = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+      const err = form.querySelector<HTMLElement>(`[data-err-for="${name}"]`);
+      if (!input || !err) return;
+      err.hidden = !show;
+      input.setAttribute("aria-invalid", String(show));
+    };
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      status.textContent = "";
+
+      const data = new FormData(form);
+      const nume = String(data.get("nume") ?? "").trim();
+      const mesaj = String(data.get("mesaj") ?? "").trim();
+      const rol = String(data.get("rol") ?? "personal");
+
+      showError("nume", nume.length < 2);
+      showError("mesaj", mesaj.length < 5);
+
+      if (nume.length < 2 || mesaj.length < 5) {
+        const first = form.querySelector<HTMLElement>('[aria-invalid="true"]');
+        first?.focus();
+        return;
+      }
+
+      // textele vin din dictionarul limbii curente, prin data-attributes
+      const ds = form.dataset;
+      const rolText = rol === "angajator" ? ds.waAngajator : ds.waPersonal;
+      const greeting = (ds.waGreeting ?? "")
+        .replace("{nume}", nume)
+        .replace("{rol}", rolText ?? "");
+      const text = `${greeting}\n\n${mesaj}\n\n${ds.waFooter ?? ""}`;
+      const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+
+      window.open(url, "_blank", "noopener");
+      status.textContent = ds.statusText ?? "";
+      form.reset();
+    });
+  }
+</script>

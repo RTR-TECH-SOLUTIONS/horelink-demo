@@ -1,0 +1,112 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  /** dimensiunile reale ale capturii, ca sa nu sara layoutul la incarcare */
+  width: number;
+  height: number;
+  class?: string;
+}
+
+const { src, alt, width, height, class: className = "" } = Astro.props;
+---
+
+<div class:list={["phone", className]}>
+  <div class="frame">
+    <span class="btn-volume" aria-hidden="true"></span>
+    <span class="btn-power" aria-hidden="true"></span>
+    <div class="screen">
+      <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+      <span class="glare" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .phone {
+    /* latimea o da parintele; ramele mari pe ecran mic arata fals */
+    width: min(280px, 72vw);
+    /* toate proportiile ramei se scaleaza cu latimea ei, nu cu viewportul */
+    container-type: inline-size;
+  }
+
+  .frame {
+    position: relative;
+    border-radius: 12.5cqw;
+    padding: 2.6cqw;
+    /* muchie de aluminiu: lumina sus-stanga, umbra jos-dreapta */
+    background: linear-gradient(152deg, #3a3a42 0%, #17171b 34%, #0d0d10 62%, #303038 100%);
+    box-shadow:
+      0 0.4cqw 1cqw rgba(0, 0, 0, 0.32),
+      0 5cqw 10cqw -4cqw rgba(0, 0, 0, 0.5),
+      0 14cqw 24cqw -10cqw rgba(0, 0, 0, 0.55);
+  }
+
+  .frame::after {
+    /* firul lucios de pe marginea exterioara */
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 0.3cqw solid rgba(255, 255, 255, 0.16);
+    pointer-events: none;
+  }
+
+  .screen {
+    position: relative;
+    border-radius: 10.2cqw;
+    overflow: hidden;
+    background: #fff;
+    /* umbra interioara: ecranul pare asezat sub sticla, nu lipit deasupra */
+    box-shadow: inset 0 0 0 0.25cqw rgba(0, 0, 0, 0.55);
+  }
+
+  .screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .glare {
+    /* reflexie foarte discreta, cat sa citesti sticla fara sa acopere ecranul */
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      148deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.05) 18%,
+      rgba(255, 255, 255, 0) 38%
+    );
+  }
+
+  /* --- butoanele laterale --- */
+  .btn-volume,
+  .btn-power {
+    position: absolute;
+    width: 0.75cqw;
+    background: linear-gradient(to right, #45454e, #1b1b20);
+    pointer-events: none;
+  }
+
+  .btn-volume {
+    inset-inline-start: -0.45cqw;
+    inset-block-start: 23cqw;
+    height: 17cqw;
+    border-radius: 0.6cqw 0 0 0.6cqw;
+  }
+
+  .btn-power {
+    inset-inline-end: -0.45cqw;
+    inset-block-start: 27cqw;
+    height: 11cqw;
+    border-radius: 0 0.6cqw 0.6cqw 0;
+    background: linear-gradient(to left, #45454e, #1b1b20);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .frame {
+      transition: transform 260ms var(--ease);
+    }
+  }
+</style>

@@ -1,0 +1,39 @@
+---
+/**
+ * Corpul paginii, identic pentru ambele limbi. Cele doua rute
+ * (/ si /en/) doar ii dau limba.
+ */
+import Layout from "../layouts/Layout.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import CumFunctioneaza from "./CumFunctioneaza.astro";
+import PentruPersonal from "./PentruPersonal.astro";
+import PentruAngajatori from "./PentruAngajatori.astro";
+import Evenimente from "./Evenimente.astro";
+import Anunt from "./Anunt.astro";
+import Descarca from "./Descarca.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import type { Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Layout lang={lang}>
+  <Header lang={lang} />
+  <main id="continut">
+    <Hero lang={lang} />
+    <CumFunctioneaza lang={lang} />
+    <PentruPersonal lang={lang} />
+    <PentruAngajatori lang={lang} />
+    <Evenimente lang={lang} />
+    <Anunt lang={lang} />
+    <Descarca lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>

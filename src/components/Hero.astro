@@ -1,0 +1,202 @@
+---
+import StoreBadges from "./StoreBadges.astro";
+import { t, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+// Pozitiile sunt exact cele pe care le acopera aplicatia, luate din
+// listarea din magazine si din ecranele ei. Nicio cifra inventata.
+const d = t(lang).hero;
+---
+
+<section class="hero on-dark">
+  <picture class="hero-media">
+    <source media="(max-width: 640px)" srcset={url("/img/hero-700.webp")} />
+    <source media="(max-width: 1100px)" srcset={url("/img/hero-1100.webp")} />
+    <img
+      src={url("/img/hero-1600.webp")}
+      alt={d.imgAlt}
+      width="1600"
+      height="686"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1>
+        {d.line1}<br />
+        {d.line2}<br />
+        {d.line3Pre}<span class="accent">{d.line3Accent}</span>{d.line3Post}
+      </h1>
+
+      <p class="lede">{d.lede}</p>
+
+      <StoreBadges lang={lang} size="lg" class="hero-badges" />
+
+      <p class="fine">{d.fine}</p>
+    </div>
+  </div>
+
+  <div class="pozitii">
+    <div class="wrap pozitii-inner">
+      <span class="pozitii-label">{d.pozitiiLabel}</span>
+      <ul>
+        {d.pozitii.map((p) => <li>{p}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--color-ink);
+    color: #fff;
+    isolation: isolate;
+  }
+
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* subiectul (ospatarii) e in dreapta cadrului */
+    object-position: 74% center;
+  }
+
+  /* doua straturi de scrim: unul care intuneca tot, unul care face
+     coltul din stanga destul de opac cat sa fie textul lizibil */
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .hero::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 11, 0.72) 0%,
+      rgba(10, 10, 11, 0.24) 42%,
+      rgba(10, 10, 11, 0.7) 100%
+    );
+  }
+
+  .hero::after {
+    background: linear-gradient(
+      to right,
+      rgba(10, 10, 11, 0.9) 0%,
+      rgba(10, 10, 11, 0.66) 42%,
+      rgba(10, 10, 11, 0.12) 72%,
+      rgba(10, 10, 11, 0) 100%
+    );
+  }
+
+  .hero-inner {
+    /* impins sub header-ul fix, cu loc si pe ecrane scurte */
+    padding-block-start: calc(var(--header-h) + clamp(3rem, 8vh, 6rem));
+    padding-block-end: clamp(3rem, 8vh, 5.5rem);
+    min-height: clamp(560px, 92svh, 880px);
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-copy {
+    max-width: 44rem;
+  }
+
+  .lede {
+    margin-block: 1.6rem 2.2rem;
+    max-width: 34rem;
+    font-size: clamp(1.02rem, 0.96rem + 0.3vw, 1.19rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .fine {
+    margin-block-start: 1.1rem;
+    font-size: 0.89rem;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  /* --- banda cu pozitii, in locul unei benzi de statistici inventate --- */
+  .pozitii {
+    position: relative;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.12);
+    background: color-mix(in srgb, var(--color-ink) 88%, transparent);
+    backdrop-filter: blur(6px);
+  }
+
+  .pozitii-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem 1.6rem;
+    padding-block: 1.15rem;
+  }
+
+  .pozitii-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+    flex: none;
+  }
+
+  .pozitii ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pozitii li {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+  }
+
+  .pozitii li + li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -0.78rem;
+    inset-block-start: 0.52em;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-brand);
+  }
+
+  @media (max-width: 767px) {
+    .hero::after {
+      /* pe mobil textul sta peste tot cadrul, deci scrimul e uniform */
+      background: rgba(10, 10, 11, 0.5);
+    }
+
+    .hero-media img {
+      object-position: 66% center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-badges {
+      margin-inline-start: -2px;
+    }
+  }
+</style>
