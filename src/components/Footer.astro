@@ -1,0 +1,145 @@
+---
+import { PLAY_URL, APPSTORE_URL } from "../data/app";
+import { t, base, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang);
+const an = new Date().getFullYear();
+
+const navigare = [
+  { href: "#cum-functioneaza", label: d.nav.cum },
+  { href: "#personal", label: d.nav.personal },
+  { href: "#angajatori", label: d.nav.angajatori },
+  { href: "#evenimente", label: d.footer.evenimenteLabel },
+  { href: "#contact", label: d.nav.contact },
+];
+---
+
+<footer class="site-footer on-dark">
+  <div class="wrap">
+    <div class="top">
+      <div class="about">
+        <a href={base(lang)} class="brand" aria-label={d.a11y.brandHome}>
+          <img src={url("/app/mark.png")} alt="" width="34" height="34" loading="lazy" />
+          <span>HoreLink</span>
+        </a>
+        <p>{d.footer.about}</p>
+      </div>
+
+      <nav aria-label={d.a11y.footerNav}>
+        <h2>{d.footer.navTitle}</h2>
+        <ul>
+          {navigare.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </nav>
+
+      <div>
+        <h2>{d.footer.appTitle}</h2>
+        <ul>
+          <li><a href={PLAY_URL} target="_blank" rel="noopener">Google Play</a></li>
+          <li><a href={APPSTORE_URL} target="_blank" rel="noopener">App Store</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; {an} {d.footer.copyright}</p>
+      {/* TODO(real): aici intra pachetul legal (Termeni, Confidențialitate,
+          Politica de cookies) și creditul RTR, la proiectul real. */}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-ink);
+    color: rgba(255, 255, 255, 0.7);
+    padding-block: clamp(3rem, 2rem + 3vw, 4.5rem) 2rem;
+    padding-block-end: calc(2rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .top {
+    display: grid;
+    gap: 2.5rem;
+    padding-block-end: 2.75rem;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  @media (min-width: 760px) {
+    .top {
+      grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr));
+      gap: 3rem;
+    }
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.18rem;
+    letter-spacing: -0.02em;
+  }
+
+  .brand img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .about p {
+    margin-block-start: 1rem;
+    max-width: 30rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.93rem;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin-block-end: 0.9rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  a:not(.brand) {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.94rem;
+    transition: color 180ms var(--ease);
+  }
+
+  a:not(.brand):hover {
+    color: #fff;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.6rem 1.5rem;
+    padding-block-start: 1.75rem;
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .credit span {
+    color: rgba(255, 255, 255, 0.78);
+  }
+</style>

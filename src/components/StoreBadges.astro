@@ -1,0 +1,49 @@
+---
+// Cele doua butoane cerute: fiecare duce la magazinul respectiv,
+// de unde utilizatorul instaleaza si isi face cont in aplicatie.
+import { PLAY_URL, APPSTORE_URL } from "../data/app";
+import { t, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+  size?: "md" | "lg";
+  class?: string;
+}
+
+const { lang, size = "md", class: className = "" } = Astro.props;
+const a = t(lang).a11y;
+// pe ecran mic badge-urile trebuie sa incapa una langa alta, nu una sub alta
+const h = size === "lg" ? "clamp(44px, 11.5vw, 60px)" : "clamp(42px, 11vw, 52px)";
+// badge-urile oficiale exista in fiecare limba; cel romanesc pe pagina engleza ar fi o scapare
+const play = url(lang === "ro" ? "/app/badge-google-play.png" : "/app/badge-google-play-en.png");
+const apple = url(lang === "ro" ? "/app/badge-app-store.svg" : "/app/badge-app-store-en.svg");
+---
+
+<div class:list={["store-badges", className]} style={`--badge-h:${h}`}>
+  <a class="store-badge" href={PLAY_URL} target="_blank" rel="noopener" aria-label={a.playBadge}>
+    <img src={play} alt={a.playAlt} width="646" height="250" />
+  </a>
+  <a
+    class="store-badge"
+    href={APPSTORE_URL}
+    target="_blank"
+    rel="noopener"
+    aria-label={a.appStoreBadge}
+  >
+    <img src={apple} alt={a.appStoreAlt} width="250" height="83" />
+  </a>
+</div>
+
+<style>
+  .store-badges :global(img) {
+    height: var(--badge-h);
+  }
+
+  /* badge-ul Google are padding transparent propriu, deci are nevoie de
+     putin mai multa inaltime ca sa para egal cu cel Apple */
+  .store-badges a:first-child :global(img) {
+    height: calc(var(--badge-h) * 1.22);
+    margin-inline-start: calc(var(--badge-h) * -0.19);
+  }
+</style>

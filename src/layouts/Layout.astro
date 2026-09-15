@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+import { t, LANGS, base, type Lang } from "../i18n";
+import { url } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang);
+const site = Astro.site?.origin ?? "https://horelink.ro";
+---
+
+<!doctype html>
+<html lang={d.htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{d.meta.title}</title>
+    <meta name="description" content={d.meta.description} />
+    <link rel="icon" type="image/png" href={url("/favicon.png")} />
+    <link rel="apple-touch-icon" href={url("/apple-touch-icon.png")} />
+    <meta name="theme-color" content="#0a0a0b" />
+    {/* preview pentru client: nu se indexeaza pana nu merge pe domeniul propriu */}
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="canonical" href={`${site}${base(lang)}`} />
+    {LANGS.map((l) => <link rel="alternate" hreflang={l} href={`${site}${base(l)}`} />)}
+    <link rel="alternate" hreflang="x-default" href={`${site}${url("/")}`} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={d.meta.title} />
+    <meta property="og:description" content={d.meta.description} />
+    <meta property="og:locale" content={lang === "ro" ? "ro_RO" : "en_GB"} />
+  </head>
+  <body>
+    <a
+      href="#continut"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-btn"
+    >
+      {d.a11y.skip}
+    </a>
+    <slot />
+
+    <script>
+      // Entrance discret pe sectiuni. Fara IntersectionObserver ar aparea totul deodata.
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const targets = document.querySelectorAll<HTMLElement>(".reveal");
+
+      if (reduce) {
+        targets.forEach((el) => el.classList.add("is-in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+        );
+        targets.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>
