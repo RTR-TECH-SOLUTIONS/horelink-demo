@@ -37,8 +37,11 @@ const ogImage = abs(`/og/horelink-${lang}.jpg`);
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
-    <link rel="icon" type="image/png" href={url("/favicon.png")} />
-    <link rel="apple-touch-icon" href={url("/apple-touch-icon.png")} />
+    {/* iconita oficiala a aplicatiei (pin rosu pe negru), ca in Google Play si App Store */}
+    <link rel="icon" href={url("/favicon.ico")} sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="96x96" href={url("/favicon.png")} />
+    <link rel="apple-touch-icon" sizes="180x180" href={url("/apple-touch-icon.png")} />
+    <link rel="manifest" href={url("/site.webmanifest")} />
     <meta name="theme-color" content="#0a0a0b" />
     {/* doar productia (horelink.ro) se indexeaza; demo-ul de pe GitHub Pages ramane noindex */}
     <meta

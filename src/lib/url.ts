@@ -9,7 +9,8 @@
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 /** are extensie de fișier (.webp, .png, ...) => nu primește slash final */
-const isFile = (path: string) => /\.[a-z0-9]{2,5}$/i.test(path.split(/[?#]/)[0]);
+// extensii pana la 11 caractere, ca sa prinda si .webmanifest
+const isFile = (path: string) => /\.[a-z0-9]{2,11}$/i.test(path.split(/[?#]/)[0]);
 
 export function url(path: string): string {
   if (!path.startsWith("/")) return path;
