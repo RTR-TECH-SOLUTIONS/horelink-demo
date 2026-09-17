@@ -114,15 +114,19 @@ aparte. Tokenii de design sunt în `src/styles/global.css`, în blocul `@theme`.
 - **Performanță (Lighthouse mobil, build de producție):** home 99 / 100 / 100 / 100, paginile
   legale 100 / 100 / 100 / 100, ~340 KB toată pagina. CSS inline, un singur fișier de font per
   familie doar cu caracterele folosite (preîncărcat), `srcset` pe capturi și poze.
-- **Hosting cyberfolks** (LiteSpeed + DirectAdmin): `public/.htaccess` face redirect http/www ->
+- **Hosting cyberfolks** (LiteSpeed + cPanel, document root `/home/horelink/public_html`): `public/.htaccess` face redirect http/www ->
   `https://horelink.ro`, slash final, cache lung pe `/_astro/`, headere de securitate și 404.
   HSTS e comentat până se confirmă SSL-ul.
 - **Deploy automat** `.github/workflows/deploy-horelink.yml`: la push pe `main` face build de
   producție și îl urcă prin FTPS. Se sare până se adaugă în GitHub secretele `FTP_SERVER`,
   `FTP_USERNAME`, `FTP_PASSWORD` (și, dacă diferă, variabilele `FTP_SERVER_DIR`, implicit
-  `./domains/horelink.ro/public_html/`, și `FTP_PROTOCOL`, implicit `ftps`).
+  `./public_html/`, și `FTP_PROTOCOL`, implicit `ftps`). Un cont FTP creat doar pe `public_html`
+  are nevoie de `FTP_SERVER_DIR` = `./`.
 - **Search Console:** verificare prin record TXT în DNS (recomandat) sau `GSC_VERIFICATION` în
   `src/data/company.ts`; apoi trimis `https://horelink.ro/sitemap.xml`.
+- **Live din 17.09.2026** pe https://horelink.ro (urcat manual prin File Manager din cPanel).
+  Lighthouse pe serverul real: 100 / 100 / 100 / 100 pe home și /pentru-companii/. SSL activ pe
+  horelink.ro și www; redirecturile, headerele, cache-ul și Brotli verificate.
 
 ## Pachet legal (făcut, 17.09.2026)
 
