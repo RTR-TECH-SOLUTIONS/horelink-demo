@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const d = t(lang).angajatori;
 ---
 
-<section class="angajatori" id="angajatori">
+<section class="angajatori" id="companii">
   <div class="wrap grid">
     <div class="visual reveal">
       <Phone src={url("/app/screen-lista.webp")} alt={d.phoneAlt} width={840} height={1495} />
@@ -130,7 +130,8 @@ const d = t(lang).angajatori;
     color: var(--color-graphite);
   }
 
-  .badges {
+  /* StoreBadges e alta componenta, stilul scoped nu ajunge la ea fara :global */
+  .copy :global(.badges) {
     margin-block-start: 2.4rem;
   }
 </style>

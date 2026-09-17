@@ -31,7 +31,7 @@ export const ro = {
   nav: {
     cum: "Cum funcționează",
     personal: "Pentru personal",
-    angajatori: "Pentru angajatori",
+    angajatori: "Pentru companii",
     evenimente: "Evenimente",
     contact: "Contact",
     cta: "Descarcă aplicația",
@@ -43,7 +43,7 @@ export const ro = {
     line3Pre: "În ",
     line3Accent: "aceeași",
     line3Post: " aplicație.",
-    lede: "HoreLink pune față în față profesioniștii din ospitalitate și locurile care au nevoie de ei: restaurante, baruri, hoteluri, firme de catering și organizatori de evenimente. Pentru o singură seară sau pentru un sezon întreg.",
+    lede: "HoreLink pune față în față profesioniștii din ospitalitate și locurile care au nevoie de ei: restaurante, baruri, hoteluri, firme de catering și organizatori de evenimente. Pentru o singură tură sau mai multe.",
     fine: "Gratuit, pe Android și pe iPhone. Îți faci contul direct în aplicație.",
     imgAlt: "Ospătari servind la o masă lungă într-o sală de evenimente, seara",
     pozitiiLabel: "Poziții acoperite",
@@ -64,11 +64,11 @@ export const ro = {
       "Același drum, văzut din două părți. Alege partea din care privești și vezi ce se întâmplă, pas cu pas.",
     tablistLabel: "Alege perspectiva",
     tabPersonal: "Sunt personal",
-    tabAngajator: "Sunt angajator",
+    tabAngajator: "Caut personal",
     personal: [
       {
         titlu: "Îți faci profilul",
-        text: "Adaugi experiența și pozițiile pe care le acoperi. Angajatorii văd exact ce știi să faci, fără să mai treci prin cineva la mijloc.",
+        text: "Adaugi experiența și pozițiile pe care le acoperi. Restaurantele și organizatorii văd exact ce știi să faci, fără să mai treci prin cineva la mijloc.",
       },
       {
         titlu: "Cauți evenimentul",
@@ -119,7 +119,6 @@ export const ro = {
       "Publici un eveniment în câteva minute, cu pozițiile și numărul de oameni de care ai nevoie.",
       "Ajungi direct la profesioniști din ospitalitate, fără agenție la mijloc.",
       "Toate aplicările într-un singur ecran, cu experiența fiecărui candidat.",
-      "Angajezi pentru o singură seară sau pentru o poziție permanentă.",
       "Vezi echipa confirmată înainte de eveniment, nu în dimineața lui.",
     ],
     phoneAlt:
@@ -159,7 +158,7 @@ export const ro = {
       },
       restaurant: {
         nume: "Restaurante și baruri",
-        text: "Nu doar evenimente: și poziții permanente, pentru sală și bucătărie.",
+        text: "Nu doar evenimente: ture în sală și în bucătărie, când localul e plin.",
         alt: "Bucătar trimițând o farfurie la pas într-o bucătărie profesională",
       },
     },
@@ -206,7 +205,7 @@ export const ro = {
 
   descarca: {
     title: "Descarcă HoreLink",
-    text: "Gratuit pe Android și pe iPhone. Îți faci contul în aplicație, alegi dacă intri ca personal sau ca angajator, și de acolo începe totul.",
+    text: "Gratuit pe Android și pe iPhone. Îți faci contul în aplicație, alegi dacă intri ca personal sau în numele unei companii, și de acolo începe totul.",
   },
 
   contact: {
@@ -220,7 +219,7 @@ export const ro = {
     numeError: "Scrie-ne cum te cheamă.",
     rolLabel: "Scrii ca",
     rolPersonal: "Personal HoReCa",
-    rolAngajator: "Angajator / organizator",
+    rolAngajator: "Companie / organizator",
     mesajLabel: "Mesaj",
     mesajError: "Spune-ne pe scurt despre ce e vorba.",
     submit: "Trimite pe WhatsApp",
@@ -230,7 +229,7 @@ export const ro = {
     /** sablonul mesajului: {nume} si {rol} sunt inlocuite, {mesaj} e textul scris */
     waGreeting: "Bună! Sunt {nume}, scriu ca {rol}.",
     waRolPersonal: "personal HoReCa",
-    waRolAngajator: "angajator / organizator",
+    waRolAngajator: "companie / organizator",
     waFooter: "(Trimis de pe site-ul HoreLink)",
   },
 
