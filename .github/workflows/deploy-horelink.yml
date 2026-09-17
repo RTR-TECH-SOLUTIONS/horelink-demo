@@ -5,7 +5,7 @@ name: Deploy pe horelink.ro (cyberfolks)
 # workflow-ul se opreste la primul pas, fara eroare.
 #
 # Optional, ca variabile de repo (Settings > Secrets and variables > Actions > Variables):
-#   FTP_SERVER_DIR  implicit ./domains/horelink.ro/public_html/  (structura DirectAdmin)
+#   FTP_SERVER_DIR  implicit ./public_html/  (cPanel: contul FTP principal porneste din /home/horelink)
 #   FTP_PROTOCOL    implicit ftps
 
 on:
@@ -64,4 +64,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_SERVER_DIR || './domains/horelink.ro/public_html/' }}
+          server-dir: ${{ vars.FTP_SERVER_DIR || './public_html/' }}
