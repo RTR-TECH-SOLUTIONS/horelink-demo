@@ -61,7 +61,6 @@ aparte. Tokenii de design sunt în `src/styles/global.css`, în blocul `@theme`.
 - Exemplul de anunț din secțiunea „Ce scrie într-un anunț" (`src/components/Anunt.astro`) e
   construit realist, nu copiat dintr-un eveniment real.
 - Programul de răspuns din secțiunea de contact.
-- `TODO(real)` în `src/components/Footer.astro` — acolo intră pachetul legal și creditul RTR.
 
 **Deliberat lipsă:**
 
@@ -99,9 +98,24 @@ aparte. Tokenii de design sunt în `src/styles/global.css`, în blocul `@theme`.
   keyworduri confirmată, apoi on-page: title/meta/H1, JSON-LD `SoftwareApplication` +
   `Organization`, `sitemap.xml`, `robots.txt`. Pagina EN primește propriul set de keyworduri,
   nu o traducere a celor românești.
-- Pachet legal: banner cookie/GDPR, Termeni și condiții, Confidențialitate, Politica de cookies.
-  Plus creditul „made by RTR" în footer.
-- Performanță la maxim: AVIF pe lângă WebP, `srcset` complet pe hero, fonturile self-hosted în
-  loc de Google Fonts.
-- Deploy: build static, merge direct pe Hostinger. Domeniul `horelink.ro` e deja cumpărat și
-  hostingul e activ, dar gol.
+- Performanță la maxim: AVIF pe lângă WebP, `srcset` complet pe hero.
+- Deploy: build static, urcat pe hostingul clientului (**cyberfolks**, nu Hostinger). Domeniul
+  `horelink.ro` e deja cumpărat. La mutare: scoase `site`/`base` din `astro.config.mjs`,
+  `noindex` din `Layout.astro` și `Disallow` din `public/robots.txt`.
+
+## Pachet legal (făcut, 17.09.2026)
+
+- Pagini RO + EN: `/termeni-si-conditii/`, `/politica-de-confidentialitate/`,
+  `/politica-de-cookies/` și `/en/terms/`, `/en/privacy-policy/`, `/en/cookie-policy/`.
+  Datele firmei stau într-un singur loc: `src/data/company.ts` (din certificatul de înregistrare).
+- Banner de consimțământ (`src/components/CookieConsent.astro`): Google Analytics nu se încarcă
+  deloc până la „Accept”; „Setări cookie” din footer redeschide bannerul; refuzul șterge `_ga`.
+  Alegerea ține 6 luni.
+- **TODO(real):** `GA_ID` în `src/data/company.ts` e gol. Cât e gol, bannerul merge, dar nu se
+  încarcă nimic de la Google. În proprietatea GA4, retenția datelor pusă pe **14 luni** (așa scrie
+  în politică).
+- Fonturile sunt servite de pe site (API-ul `fonts` din Astro), nu de la Google Fonts.
+- Creditul „Site realizat de RTR Solutions” e în footer.
+- De confirmat cu clientul: păstrarea mesajelor WhatsApp **maximum 12 luni** (scris în politică)
+  și că aplicația are propriii termeni și propria politică de confidențialitate (acum linkul din
+  Google Play duce la politica generală a dezvoltatorului, abac.software).

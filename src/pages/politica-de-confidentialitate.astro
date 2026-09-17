@@ -1,0 +1,154 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { COMPANY } from "../data/company";
+import { legalHref } from "../i18n";
+---
+
+<LegalPage lang="ro" page="confidentialitate">
+  <p>
+    Această politică explică ce date personale prelucrăm când vizitezi site-ul <strong>{COMPANY.domain}</strong>{" "}
+    sau ne scrii prin formularul de contact, de ce le prelucrăm, cât timp le păstrăm și ce drepturi ai.
+    Prelucrăm datele conform Regulamentului (UE) 2016/679 (GDPR) și legislației române aplicabile.
+  </p>
+
+  <h2 id="operator">1. Cine prelucrează datele</h2>
+  <p>Operatorul datelor este:</p>
+  <dl class="fisa">
+    <dt>Denumire</dt>
+    <dd>{COMPANY.name}</dd>
+    <dt>Sediu social</dt>
+    <dd>{COMPANY.address}</dd>
+    <dt>CUI</dt>
+    <dd>{COMPANY.cui}</dd>
+    <dt>Nr. Registrul Comerțului</dt>
+    <dd>{COMPANY.regCom}</dd>
+    <dt>Email</dt>
+    <dd><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></dd>
+    <dt>Telefon</dt>
+    <dd><a href={COMPANY.phoneHref}>{COMPANY.phone}</a></dd>
+  </dl>
+
+  <h2 id="ce-date">2. Ce date prelucrăm și de ce</h2>
+
+  <h3>a) Când ne scrii prin formularul de contact</h3>
+  <p>
+    Formularul nu trimite datele către un server al nostru și nu le salvează pe site. Când apeși „Trimite pe
+    WhatsApp”, textul este transmis către WhatsApp, care deschide o conversație cu mesajul deja scris:
+    numele tău, calitatea în care scrii (personal HoReCa sau companie / organizator) și mesajul. Mesajul
+    ajunge la noi doar după ce îl trimiți din WhatsApp, iar atunci vedem și numărul tău de telefon și
+    numele profilului tău de WhatsApp.
+  </p>
+  <ul>
+    <li><strong>Scop:</strong> să îți răspundem la întrebări și să discutăm despre o posibilă colaborare.</li>
+    <li>
+      <strong>Temei:</strong> art. 6 alin. (1) lit. b) GDPR (demersuri făcute la cererea ta) și art. 6 alin. (1)
+      lit. f) GDPR (interesul nostru legitim de a răspunde solicitărilor primite).
+    </li>
+    <li>
+      <strong>Cât păstrăm:</strong> cât timp este necesar ca să îți răspundem și să urmărim solicitarea, dar nu
+      mai mult de 12 luni de la ultimul mesaj, cu excepția cazului în care legea ne obligă să păstrăm datele
+      mai mult.
+    </li>
+  </ul>
+  <p>
+    WhatsApp este furnizat în Uniunea Europeană de WhatsApp Ireland Limited, care prelucrează datele și
+    conform propriei politici de confidențialitate.
+  </p>
+
+  <h3>b) Statistici de vizitare, doar cu acordul tău</h3>
+  <p>
+    Dacă accepți cookie-urile de statistică, folosim Google Analytics 4 ca să aflăm ce pagini sunt vizitate,
+    cât timp, de pe ce tip de dispozitiv și browser și din ce țară sau oraș, aproximativ. Google Analytics 4
+    nu stochează adresa IP. Nu folosim aceste date ca să te identificăm și nu le folosim pentru publicitate.
+    Dacă refuzi, scriptul Google Analytics nu se încarcă deloc.
+  </p>
+  <ul>
+    <li><strong>Scop:</strong> să înțelegem cum este folosit site-ul și ce trebuie îmbunătățit.</li>
+    <li>
+      <strong>Temei:</strong> consimțământul tău, conform art. 6 alin. (1) lit. a) GDPR. Îl poți retrage oricând
+      din linkul „Setări cookie” din subsolul site-ului.
+    </li>
+    <li><strong>Cât păstrăm:</strong> cel mult 14 luni, după care datele sunt șterse automat din Google Analytics.</li>
+    <li>
+      <strong>Furnizor:</strong> Google Ireland Limited. Datele pot fi transferate către Google LLC, în SUA, în baza
+      deciziei de adecvare a Comisiei Europene privind Cadrul UE-SUA pentru protecția datelor (EU-U.S. Data
+      Privacy Framework).
+    </li>
+  </ul>
+
+  <h3>c) Date tehnice de funcționare</h3>
+  <p>
+    Când accesezi site-ul, serverul furnizorului nostru de găzduire înregistrează automat date tehnice precum
+    adresa IP, data și ora accesării, pagina cerută și tipul de browser. Le folosim doar pentru funcționarea
+    și securitatea site-ului, în baza interesului nostru legitim (art. 6 alin. (1) lit. f) GDPR), și sunt
+    păstrate pentru o perioadă limitată.
+  </p>
+
+  <h3>d) Alegerea ta privind cookie-urile</h3>
+  <p>
+    Dacă ai acceptat sau ai refuzat cookie-urile de statistică se reține doar în browserul tău, timp de 6
+    luni, ca să nu te întrebăm la fiecare vizită. Această informație nu ne este trimisă.
+  </p>
+
+  <h2 id="aplicatia">3. Datele din aplicația mobilă</h2>
+  <p>
+    Datele pe care le introduci în aplicația HoreLink (cont, profil, experiență, aplicări, evenimente
+    publicate) nu sunt acoperite de această politică. Prelucrarea lor este descrisă în politica de
+    confidențialitate a aplicației, disponibilă pe pagina aplicației din Google Play și App Store.
+  </p>
+
+  <h2 id="destinatari">4. Cui transmitem datele</h2>
+  <p>Nu vindem datele personale și nu le folosim pentru publicitate. Datele pot ajunge la:</p>
+  <ul>
+    <li>WhatsApp Ireland Limited, când ne scrii prin formular;</li>
+    <li>Google Ireland Limited, doar dacă accepți cookie-urile de statistică;</li>
+    <li>furnizorul de găzduire a site-ului, care prelucrează datele tehnice în numele nostru;</li>
+    <li>autorități publice, doar când legea ne obligă.</li>
+  </ul>
+
+  <h2 id="drepturi">5. Drepturile tale</h2>
+  <p>Conform GDPR, ai dreptul:</p>
+  <ul>
+    <li>să afli ce date avem despre tine și să primești o copie a lor (art. 15);</li>
+    <li>să ceri corectarea datelor inexacte (art. 16);</li>
+    <li>să ceri ștergerea datelor (art. 17);</li>
+    <li>să ceri restricționarea prelucrării (art. 18);</li>
+    <li>să primești datele într-un format structurat, pe care să îl poți transmite altui operator (art. 20);</li>
+    <li>să te opui prelucrării bazate pe interesul nostru legitim (art. 21);</li>
+    <li>să îți retragi oricând consimțământul, fără să fie afectată prelucrarea făcută înainte de retragere (art. 7);</li>
+    <li>
+      să depui o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter
+      Personal (<a href="https://www.dataprotection.ro/" target="_blank" rel="noopener">dataprotection.ro</a>).
+    </li>
+  </ul>
+  <p>
+    Pentru oricare dintre aceste drepturi scrie-ne la <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
+    Îți răspundem în cel mult o lună de la primirea cererii. Dacă cererea este complexă, termenul se poate
+    prelungi cu încă două luni, iar în acest caz te anunțăm.
+  </p>
+
+  <h2 id="securitate">6. Securitatea datelor</h2>
+  <p>
+    Site-ul este servit prin conexiune securizată (HTTPS) și nu stochează datele din formular. Accesul la
+    conversațiile de WhatsApp și la contul de Google Analytics îl au doar persoanele din HoreLink care au
+    nevoie de el ca să răspundă solicitărilor sau să analizeze statisticile.
+  </p>
+
+  <h2 id="minori">7. Minori</h2>
+  <p>
+    Site-ul nu se adresează copiilor sub 16 ani. Dacă afli că un copil ne-a transmis date personale, scrie-ne și
+    le ștergem.
+  </p>
+
+  <h2 id="cookies">8. Cookie-uri</h2>
+  <p>
+    Lista completă a cookie-urilor și modul în care îți poți schimba alegerea sunt în{" "}
+    <a href={legalHref("cookies", "ro")}>Politica de cookies</a>.
+  </p>
+
+  <h2 id="modificari">9. Modificarea politicii</h2>
+  <p>
+    Putem actualiza această politică când se schimbă site-ul, serviciile folosite sau legislația. Data
+    ultimei actualizări apare în capul paginii.
+  </p>
+</LegalPage>

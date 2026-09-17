@@ -1,5 +1,5 @@
 ---
-import { t, type Lang } from "../i18n";
+import { t, legalHref, type Lang } from "../i18n";
 
 interface Props {
   lang: Lang;
@@ -74,6 +74,9 @@ const d = t(lang).contact;
 
       <p class="status" data-status role="status" aria-live="polite"></p>
       <p class="fine">{d.fine}</p>
+      <p class="fine">
+        {d.privacyPre}<a href={legalHref("confidentialitate", lang)}>{d.privacyLink}</a>.
+      </p>
     </form>
   </div>
 </section>
@@ -253,6 +256,15 @@ const d = t(lang).contact;
   .fine {
     font-size: 0.83rem;
     color: var(--color-slate);
+  }
+
+  .fine + .fine {
+    margin-block-start: -0.35rem;
+  }
+
+  .fine a {
+    color: var(--color-graphite);
+    text-underline-offset: 3px;
   }
 </style>
 

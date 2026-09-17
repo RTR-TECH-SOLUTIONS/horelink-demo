@@ -1,0 +1,103 @@
+---
+import LegalPage from "../../components/LegalPage.astro";
+import { COMPANY } from "../../data/company";
+import { legalHref } from "../../i18n";
+---
+
+<LegalPage lang="en" page="cookies">
+  <p>
+    This policy explains which cookies and similar technologies are used on <strong>{COMPANY.domain}</strong>,
+    operated by {COMPANY.name}, and how you can give or withdraw your consent.
+  </p>
+
+  <h2 id="what-are-cookies">1. What cookies are</h2>
+  <p>
+    Cookies are small files that a website saves in your browser. Some are needed for the website to work, others
+    help measure visits. Your browser's local storage (localStorage) works in a similar way, and this policy treats
+    it the same.
+  </p>
+
+  <h2 id="what-we-use">2. What we use</h2>
+  <p>
+    We only use two categories: one strictly necessary item that remembers your choice, and Google Analytics
+    statistics cookies, which only start if you accept them. We do not use advertising cookies and we do not track
+    you across other websites.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Provider</th>
+          <th scope="col">Purpose</th>
+          <th scope="col">Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>horelink-consent</code></td>
+          <td>Strictly necessary (local storage)</td>
+          <td>HoreLink</td>
+          <td>Remembers whether you accepted or declined statistics cookies.</td>
+          <td>6 months</td>
+        </tr>
+        <tr>
+          <td><code>_ga</code></td>
+          <td>Statistics, consent only</td>
+          <td>Google Analytics</td>
+          <td>Tells visitors apart, without identifying them.</td>
+          <td>2 years</td>
+        </tr>
+        <tr>
+          <td><code>_ga_&lt;ID&gt;</code></td>
+          <td>Statistics, consent only</td>
+          <td>Google Analytics</td>
+          <td>Keeps the state of the visit session.</td>
+          <td>2 years</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    The strictly necessary item does not require your consent, because without it we could not respect the choice
+    you made. Google Analytics cookies are not created, and the Google script is not loaded, until you press
+    “Accept”.
+  </p>
+
+  <h2 id="consent">3. How to give or withdraw consent</h2>
+  <ul>
+    <li>On your first visit a banner lets you choose “Accept” or “Decline”.</li>
+    <li>
+      You can change your choice at any time from the “Cookie settings” link in the website footer. If you decline
+      after accepting, we delete the Google Analytics cookies set by the website.
+    </li>
+    <li>
+      You can delete or block cookies in your browser settings. If you clear the website's data, the banner will
+      appear again.
+    </li>
+    <li>
+      You can block Google Analytics on all websites with Google's official browser add-on
+      (<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>).
+    </li>
+  </ul>
+
+  <h2 id="other-services">4. Links to other services</h2>
+  <p>
+    When you follow the links to Google Play, the App Store or WhatsApp, you leave our website. Those services may
+    use their own cookies under their own policies, which we do not control.
+  </p>
+
+  <h2 id="personal-data">5. Personal data</h2>
+  <p>
+    How we process data obtained through Google Analytics and the contact form is explained in our{" "}
+    <a href={legalHref("confidentialitate", "en")}>Privacy policy</a>.
+  </p>
+
+  <h2 id="contact">6. Contact</h2>
+  <p>
+    For questions about cookies, write to <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
+  </p>
+</LegalPage>

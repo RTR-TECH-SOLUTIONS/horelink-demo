@@ -1,0 +1,280 @@
+---
+/**
+ * Cadrul comun pentru Termeni, Confidentialitate si Cookies.
+ * Continutul vine din slot; cuprinsul lateral se construieste din h2-urile cu id.
+ */
+import Layout from "../layouts/Layout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import { LEGAL_UPDATED } from "../data/company";
+import { t, base, LEGAL_ROUTES, type Lang, type LegalPage } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  page: LegalPage;
+}
+
+const { lang, page } = Astro.props;
+const d = t(lang);
+const info = d.legal[page];
+const paths = LEGAL_ROUTES[page];
+
+const html = await Astro.slots.render("default");
+const toc = [...html.matchAll(/<h2 id="([^"]+)"[^>]*>(.*?)<\/h2>/g)].map(([, id, label]) => ({
+  id,
+  label: label.replace(/<[^>]+>/g, ""),
+}));
+---
+
+<Layout lang={lang} title={`${info.title} | HoreLink`} description={info.description} paths={paths}>
+  <Header lang={lang} paths={paths} solid />
+
+  <main id="continut" class="legal">
+    <div class="wrap layout">
+      <article>
+        <nav class="crumbs" aria-label={info.nav}>
+          <a href={base(lang)}>{d.legal.home}</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{info.nav}</span>
+        </nav>
+
+        <h1>{info.title}</h1>
+        <p class="updated">{d.legal.updated} {LEGAL_UPDATED[lang]}</p>
+
+        <div class="prose">
+          <Fragment set:html={html} />
+        </div>
+      </article>
+
+      {
+        toc.length > 0 && (
+          <aside class="toc" aria-labelledby="toc-title">
+            <p id="toc-title">{d.legal.onThisPage}</p>
+            <ol>
+              {toc.map((item) => (
+                <li>
+                  <a href={`#${item.id}`} set:html={item.label} />
+                </li>
+              ))}
+            </ol>
+          </aside>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer lang={lang} />
+</Layout>
+
+<style>
+  .legal {
+    padding-block: calc(var(--header-h) + clamp(2.5rem, 1.5rem + 3vw, 4.5rem))
+      clamp(4rem, 2.5rem + 5vw, 6.5rem);
+  }
+
+  /* minmax(0, ...) altfel tabelul lat impinge coloana peste ecran pe mobil */
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .layout {
+      grid-template-columns: minmax(0, 46rem) minmax(0, 15rem);
+      justify-content: space-between;
+    }
+  }
+
+  .crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-end: 1.25rem;
+    font-size: 0.88rem;
+    color: var(--color-slate);
+  }
+
+  .crumbs a {
+    color: var(--color-slate);
+    text-underline-offset: 3px;
+  }
+
+  .crumbs a:hover {
+    color: var(--color-graphite);
+  }
+
+  h1 {
+    font-size: clamp(2.1rem, 1.6rem + 2.2vw, 3.25rem);
+  }
+
+  .updated {
+    margin-block: 0.9rem 2.5rem;
+    padding-block-end: 2rem;
+    border-block-end: 1px solid rgba(23, 23, 26, 0.12);
+    font-size: 0.92rem;
+    color: var(--color-slate);
+  }
+
+  /* continutul vine prin set:html, deci stilurile trebuie sa fie globale sub .prose */
+  .prose {
+    color: var(--color-graphite);
+    font-size: 1.02rem;
+  }
+
+  .prose :global(h2) {
+    margin-block: 2.75rem 0.9rem;
+    font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+    letter-spacing: -0.015em;
+    scroll-margin-top: calc(var(--header-h) + 20px);
+  }
+
+  .prose :global(h3) {
+    margin-block: 1.75rem 0.6rem;
+    font-size: 1.08rem;
+  }
+
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(dl) {
+    margin-block: 0 1rem;
+  }
+
+  .prose :global(ul) {
+    padding-inline-start: 1.2rem;
+    list-style: disc;
+  }
+
+  .prose :global(li) {
+    margin-block-end: 0.45rem;
+  }
+
+  .prose :global(li::marker) {
+    color: var(--color-brand);
+  }
+
+  .prose :global(a) {
+    color: var(--color-graphite);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-brand) 65%, transparent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+
+  .prose :global(a:hover) {
+    text-decoration-color: var(--color-brand);
+  }
+
+  /* fisa firmei: eticheta + valoare, ca intr-un document, nu o lista oarecare */
+  .prose :global(.fisa) {
+    display: grid;
+    gap: 0.55rem 1.5rem;
+    padding: 1.2rem 1.35rem;
+    background: var(--color-paper-2);
+    border-radius: var(--radius-card);
+    font-size: 0.96rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose :global(.fisa) {
+      grid-template-columns: max-content 1fr;
+    }
+  }
+
+  .prose :global(.fisa dt) {
+    color: var(--color-slate);
+  }
+
+  .prose :global(.fisa dd) {
+    margin: 0 0 0.35rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose :global(.fisa dd) {
+      margin: 0;
+    }
+  }
+
+  .prose :global(.table-wrap) {
+    margin-block: 0.5rem 1.25rem;
+    overflow-x: auto;
+    border: 1px solid rgba(23, 23, 26, 0.12);
+    border-radius: var(--radius-card);
+  }
+
+  .prose :global(table) {
+    width: 100%;
+    min-width: 36rem;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .prose :global(th),
+  .prose :global(td) {
+    padding: 0.75rem 0.9rem;
+    text-align: start;
+    vertical-align: top;
+    border-block-end: 1px solid rgba(23, 23, 26, 0.1);
+  }
+
+  .prose :global(th) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    background: var(--color-paper-2);
+  }
+
+  .prose :global(tr:last-child td) {
+    border-block-end: 0;
+  }
+
+  .prose :global(code) {
+    white-space: nowrap;
+    font-size: 0.9em;
+    padding: 0.1em 0.35em;
+    background: var(--color-paper-2);
+    border-radius: 5px;
+  }
+
+  .toc {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .toc {
+      display: block;
+      position: sticky;
+      inset-block-start: calc(var(--header-h) + 2rem);
+      align-self: start;
+      padding-inline-start: 1.25rem;
+      border-inline-start: 1px solid rgba(23, 23, 26, 0.12);
+    }
+  }
+
+  .toc p {
+    margin-block-end: 0.8rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .toc ol {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc a {
+    color: var(--color-slate);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .toc a:hover {
+    color: var(--color-graphite);
+  }
+</style>

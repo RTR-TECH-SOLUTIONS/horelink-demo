@@ -17,8 +17,9 @@
   --color-slate: #5c5c64;
   --color-ash: #9d9da6;
 
-  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* variabilele vin din <Font /> (astro.config.mjs), cu fallback-uri calibrate */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 10px;
   --radius-btn: 9px;
