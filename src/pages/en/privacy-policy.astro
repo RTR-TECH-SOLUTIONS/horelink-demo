@@ -1,0 +1,150 @@
+---
+import LegalPage from "../../components/LegalPage.astro";
+import { COMPANY } from "../../data/company";
+import { legalHref } from "../../i18n";
+---
+
+<LegalPage lang="en" page="confidentialitate">
+  <p>
+    This policy explains what personal data we process when you visit <strong>{COMPANY.domain}</strong> or write
+    to us through the contact form, why we process it, how long we keep it and what your rights are. We process
+    data in line with Regulation (EU) 2016/679 (GDPR) and applicable Romanian law.
+  </p>
+
+  <h2 id="controller">1. Who processes your data</h2>
+  <p>The data controller is:</p>
+  <dl class="fisa">
+    <dt>Company name</dt>
+    <dd>{COMPANY.name}</dd>
+    <dt>Registered office</dt>
+    <dd>{COMPANY.address}, Romania</dd>
+    <dt>Tax ID (CUI)</dt>
+    <dd>{COMPANY.cui}</dd>
+    <dt>Trade Register no.</dt>
+    <dd>{COMPANY.regCom}</dd>
+    <dt>Email</dt>
+    <dd><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></dd>
+    <dt>Phone</dt>
+    <dd><a href={COMPANY.phoneHref}>+40 {COMPANY.phone.slice(1)}</a></dd>
+  </dl>
+
+  <h2 id="what-data">2. What data we process and why</h2>
+
+  <h3>a) When you write to us through the contact form</h3>
+  <p>
+    The form does not send your details to a server of ours and does not store them on the website. When you press
+    “Send on WhatsApp”, the text is passed to WhatsApp, which opens a chat with the message already written: your
+    name, the capacity you are writing in (hospitality staff or business / organiser) and your message. The message
+    only reaches us once you send it from WhatsApp, and we then also see your phone number and WhatsApp profile name.
+  </p>
+  <ul>
+    <li><strong>Purpose:</strong> to answer your questions and discuss a possible collaboration.</li>
+    <li>
+      <strong>Legal basis:</strong> Art. 6(1)(b) GDPR (steps taken at your request) and Art. 6(1)(f) GDPR (our
+      legitimate interest in answering the requests we receive).
+    </li>
+    <li>
+      <strong>Retention:</strong> as long as needed to answer and follow up on your request, but no longer than 12
+      months after the last message, unless the law requires us to keep the data longer.
+    </li>
+  </ul>
+  <p>
+    In the European Union, WhatsApp is provided by WhatsApp Ireland Limited, which also processes the data under
+    its own privacy policy.
+  </p>
+
+  <h3>b) Visit statistics, only with your consent</h3>
+  <p>
+    If you accept statistics cookies, we use Google Analytics 4 to learn which pages are visited, for how long,
+    from what type of device and browser, and from roughly which country or city. Google Analytics 4 does not
+    store IP addresses. We do not use this data to identify you and we do not use it for advertising. If you
+    decline, the Google Analytics script is not loaded at all.
+  </p>
+  <ul>
+    <li><strong>Purpose:</strong> to understand how the website is used and what needs improving.</li>
+    <li>
+      <strong>Legal basis:</strong> your consent, under Art. 6(1)(a) GDPR. You can withdraw it at any time from the
+      “Cookie settings” link in the website footer.
+    </li>
+    <li><strong>Retention:</strong> up to 14 months, after which the data is deleted automatically from Google Analytics.</li>
+    <li>
+      <strong>Provider:</strong> Google Ireland Limited. Data may be transferred to Google LLC in the United States
+      under the European Commission's adequacy decision for the EU-U.S. Data Privacy Framework.
+    </li>
+  </ul>
+
+  <h3>c) Technical data</h3>
+  <p>
+    When you access the website, our hosting provider's server automatically records technical data such as your
+    IP address, the date and time of access, the page requested and your browser type. We use it only to run and
+    secure the website, based on our legitimate interest (Art. 6(1)(f) GDPR), and it is kept for a limited period.
+  </p>
+
+  <h3>d) Your cookie choice</h3>
+  <p>
+    Whether you accepted or declined statistics cookies is stored only in your browser, for 6 months, so we do not
+    ask you on every visit. This information is not sent to us.
+  </p>
+
+  <h2 id="the-app">3. Data in the mobile app</h2>
+  <p>
+    The data you enter in the HoreLink app (account, profile, experience, applications, published events) is not
+    covered by this policy. Its processing is described in the app's privacy policy, available on the app's page
+    in Google Play and the App Store.
+  </p>
+
+  <h2 id="recipients">4. Who we share data with</h2>
+  <p>We do not sell personal data and we do not use it for advertising. Data may reach:</p>
+  <ul>
+    <li>WhatsApp Ireland Limited, when you write to us through the form;</li>
+    <li>Google Ireland Limited, only if you accept statistics cookies;</li>
+    <li>the website's hosting provider, which processes technical data on our behalf;</li>
+    <li>public authorities, only when the law requires it.</li>
+  </ul>
+
+  <h2 id="your-rights">5. Your rights</h2>
+  <p>Under the GDPR, you have the right:</p>
+  <ul>
+    <li>to know what data we hold about you and to receive a copy (Art. 15);</li>
+    <li>to have inaccurate data corrected (Art. 16);</li>
+    <li>to have your data erased (Art. 17);</li>
+    <li>to restrict processing (Art. 18);</li>
+    <li>to receive your data in a structured format that you can pass to another controller (Art. 20);</li>
+    <li>to object to processing based on our legitimate interest (Art. 21);</li>
+    <li>to withdraw your consent at any time, without affecting processing carried out before withdrawal (Art. 7);</li>
+    <li>
+      to lodge a complaint with the Romanian National Supervisory Authority for Personal Data Processing
+      (<a href="https://www.dataprotection.ro/" target="_blank" rel="noopener">dataprotection.ro</a>).
+    </li>
+  </ul>
+  <p>
+    To exercise any of these rights, write to <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>. We will reply
+    within one month of receiving your request. If the request is complex, this period may be extended by two more
+    months, in which case we will let you know.
+  </p>
+
+  <h2 id="security">6. Data security</h2>
+  <p>
+    The website is served over a secure connection (HTTPS) and does not store the details entered in the form. Only
+    the people at HoreLink who need it to answer requests or review statistics have access to the WhatsApp
+    conversations and the Google Analytics account.
+  </p>
+
+  <h2 id="children">7. Children</h2>
+  <p>
+    The website is not aimed at children under 16. If you find out that a child has sent us personal data, write to
+    us and we will delete it.
+  </p>
+
+  <h2 id="cookies">8. Cookies</h2>
+  <p>
+    The full list of cookies and how to change your choice are in our{" "}
+    <a href={legalHref("cookies", "en")}>Cookie policy</a>.
+  </p>
+
+  <h2 id="changes">9. Changes to this policy</h2>
+  <p>
+    We may update this policy when the website, the services we use or the law change. The date of the last update
+    is shown at the top of this page.
+  </p>
+</LegalPage>

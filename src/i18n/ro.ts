@@ -226,6 +226,8 @@ export const ro = {
     status:
       "Am deschis WhatsApp cu mesajul tău. Dacă nu s-a deschis, verifică dacă browserul blochează ferestrele noi.",
     fine: "Se deschide WhatsApp cu mesajul deja scris. Îl poți modifica înainte să îl trimiți.",
+    privacyPre: "Ce se întâmplă cu datele din mesaj afli din ",
+    privacyLink: "Politica de confidențialitate",
     /** sablonul mesajului: {nume} si {rol} sunt inlocuite, {mesaj} e textul scris */
     waGreeting: "Bună! Sunt {nume}, scriu ca {rol}.",
     waRolPersonal: "personal HoReCa",
@@ -239,7 +241,39 @@ export const ro = {
     navTitle: "Pe site",
     appTitle: "Aplicația",
     evenimenteLabel: "Unde se lucrează",
-    copyright: "HoreLink. Toate drepturile rezervate.",
+    legalTitle: "Informații legale",
+    cookieSettings: "Setări cookie",
+    credit: "Site realizat de",
+  },
+
+  legal: {
+    home: "Pagina principală",
+    updated: "Ultima actualizare:",
+    onThisPage: "Pe această pagină",
+    termeni: {
+      nav: "Termeni și condiții",
+      title: "Termeni și condiții",
+      description: "Condițiile de folosire a site-ului horelink.ro, operat de HORELINK S.R.L.",
+    },
+    confidentialitate: {
+      nav: "Politica de confidențialitate",
+      title: "Politica de confidențialitate",
+      description:
+        "Ce date personale prelucrează HORELINK S.R.L. când vizitezi horelink.ro sau ne scrii, de ce și ce drepturi ai.",
+    },
+    cookies: {
+      nav: "Politica de cookies",
+      title: "Politica de cookies",
+      description: "Ce cookie-uri folosește horelink.ro, la ce servesc și cum îți retragi acordul.",
+    },
+  },
+
+  consent: {
+    label: "Preferințe cookie",
+    text: "Folosim Google Analytics ca să vedem ce pagini sunt citite și ce merită îmbunătățit. Cookie-urile de statistică pornesc doar dacă accepți.",
+    policy: "Politica de cookies",
+    accept: "Accept",
+    reject: "Refuz",
   },
 };
 

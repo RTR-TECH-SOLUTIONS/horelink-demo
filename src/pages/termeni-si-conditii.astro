@@ -1,0 +1,108 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { COMPANY } from "../data/company";
+import { legalHref } from "../i18n";
+---
+
+<LegalPage lang="ro" page="termeni">
+  <p>
+    Acești termeni se aplică site-ului <strong>{COMPANY.domain}</strong> (în continuare „site-ul”). Site-ul
+    este operat de <strong>{COMPANY.name}</strong> (în continuare „HoreLink” sau „noi”). Dacă folosești
+    site-ul, ești de acord cu termenii de mai jos.
+  </p>
+
+  <dl class="fisa">
+    <dt>Denumire</dt>
+    <dd>{COMPANY.name}</dd>
+    <dt>Sediu social</dt>
+    <dd>{COMPANY.address}</dd>
+    <dt>CUI</dt>
+    <dd>{COMPANY.cui}</dd>
+    <dt>Nr. Registrul Comerțului</dt>
+    <dd>{COMPANY.regCom}</dd>
+    <dt>EUID</dt>
+    <dd>{COMPANY.euid}</dd>
+  </dl>
+
+  <h2 id="ce-este-site-ul">1. Ce este site-ul</h2>
+  <p>
+    Site-ul prezintă aplicația mobilă HoreLink, care pune în legătură profesioniștii din ospitalitate cu
+    restaurantele, barurile, hotelurile, firmele de catering și organizatorii de evenimente, pentru
+    colaborări punctuale. De pe site poți descărca aplicația din Google Play sau App Store și ne poți scrie
+    pe WhatsApp prin formularul de contact.
+  </p>
+  <p>Pe site nu se creează conturi, nu se publică anunțuri și nu se fac plăți.</p>
+
+  <h2 id="aplicatia-mobila">2. Aplicația mobilă</h2>
+  <p>
+    Contul, profilul, evenimentele publicate și aplicările se gestionează exclusiv în aplicație. Acești
+    termeni se referă doar la site. Folosirea aplicației se face în condițiile aplicabile aplicației și
+    ale magazinului din care o descarci (Google Play sau App Store).
+  </p>
+
+  <h2 id="informatiile-de-pe-site">3. Informațiile de pe site</h2>
+  <p>
+    Textele, capturile de ecran și imaginile de pe site au rol de prezentare. Exemplele de evenimente și de
+    anunțuri (de exemplu „Gală corporate de final de an”) sunt ilustrative și nu reprezintă oferte reale.
+    Ce evenimente, poziții și locuri sunt disponibile vezi în aplicație, în funcție de ce publică
+    utilizatorii în acel moment.
+  </p>
+
+  <h2 id="folosirea-site-ului">4. Folosirea corectă a site-ului</h2>
+  <p>Când folosești site-ul, te obligi să nu:</p>
+  <ul>
+    <li>încerci să accesezi neautorizat site-ul, serverele sau datele altor persoane;</li>
+    <li>afectezi funcționarea site-ului, de exemplu prin trafic automat excesiv sau cod dăunător;</li>
+    <li>folosești formularul de contact pentru mesaje comerciale nesolicitate sau conținut ilegal.</li>
+  </ul>
+
+  <h2 id="proprietate-intelectuala">5. Proprietate intelectuală</h2>
+  <p>
+    Numele HoreLink, sigla, textele, imaginile și designul site-ului aparțin {COMPANY.name} sau sunt
+    folosite cu drept de utilizare. Nu le poți copia, modifica sau folosi în scop comercial fără acordul
+    nostru scris. Google Play este marcă a Google LLC, iar App Store este marcă a Apple Inc.
+  </p>
+
+  <h2 id="linkuri-externe">6. Linkuri către alte servicii</h2>
+  <p>
+    Site-ul conține linkuri către Google Play, App Store și WhatsApp. Aceste servicii au propriii termeni și
+    propriile politici de confidențialitate, pentru care nu răspundem. Te rugăm să le citești înainte să le
+    folosești.
+  </p>
+
+  <h2 id="raspundere">7. Răspundere</h2>
+  <p>
+    Ne străduim ca informațiile de pe site să fie corecte și actuale, dar nu putem garanta că sunt lipsite
+    de erori sau că site-ul este disponibil permanent. Site-ul poate fi indisponibil temporar pentru
+    întreținere sau din motive tehnice. În limitele permise de lege, nu răspundem pentru pagube indirecte
+    rezultate din folosirea site-ului.
+  </p>
+
+  <h2 id="date-personale">8. Date personale și cookie-uri</h2>
+  <p>
+    Cum prelucrăm datele personale afli din{" "}
+    <a href={legalHref("confidentialitate", "ro")}>Politica de confidențialitate</a>, iar ce cookie-uri
+    folosim afli din <a href={legalHref("cookies", "ro")}>Politica de cookies</a>.
+  </p>
+
+  <h2 id="modificari">9. Modificarea termenilor</h2>
+  <p>
+    Putem actualiza acești termeni, de exemplu când se schimbă site-ul sau legislația. Data ultimei
+    actualizări apare în capul paginii. Versiunea publicată aici se aplică de la data afișată.
+  </p>
+
+  <h2 id="legea-aplicabila">10. Legea aplicabilă</h2>
+  <p>
+    Acești termeni sunt guvernați de legea română. Orice neînțelegere o rezolvăm mai întâi pe cale
+    amiabilă, iar dacă nu reușim, este competentă instanța din România. Dacă ești consumator, te poți
+    adresa și Autorității Naționale pentru Protecția Consumatorilor
+    (<a href="https://anpc.ro/" target="_blank" rel="noopener">anpc.ro</a>).
+  </p>
+
+  <h2 id="contact">11. Contact</h2>
+  <p>
+    Pentru orice întrebare despre acești termeni ne găsești la{" "}
+    <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> sau la telefon{" "}
+    <a href={COMPANY.phoneHref}>{COMPANY.phone}</a>.
+  </p>
+</LegalPage>

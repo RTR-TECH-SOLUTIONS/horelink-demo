@@ -227,6 +227,8 @@ export const en: Dict = {
     status:
       "We opened WhatsApp with your message. If nothing happened, check whether your browser is blocking new windows.",
     fine: "WhatsApp opens with the message already written. You can edit it before sending.",
+    privacyPre: "What happens to the details in your message is explained in our ",
+    privacyLink: "Privacy policy",
     waGreeting: "Hi! I am {nume}, writing as {rol}.",
     waRolPersonal: "hospitality staff",
     waRolAngajator: "business / organiser",
@@ -239,6 +241,38 @@ export const en: Dict = {
     navTitle: "On this site",
     appTitle: "The app",
     evenimenteLabel: "Where the work happens",
-    copyright: "HoreLink. All rights reserved.",
+    legalTitle: "Legal",
+    cookieSettings: "Cookie settings",
+    credit: "Website by",
+  },
+
+  legal: {
+    home: "Home",
+    updated: "Last updated:",
+    onThisPage: "On this page",
+    termeni: {
+      nav: "Terms and conditions",
+      title: "Terms and conditions",
+      description: "The terms of use for the horelink.ro website, operated by HORELINK S.R.L.",
+    },
+    confidentialitate: {
+      nav: "Privacy policy",
+      title: "Privacy policy",
+      description:
+        "What personal data HORELINK S.R.L. processes when you visit horelink.ro or write to us, why, and what your rights are.",
+    },
+    cookies: {
+      nav: "Cookie policy",
+      title: "Cookie policy",
+      description: "Which cookies horelink.ro uses, what they are for and how to withdraw your consent.",
+    },
+  },
+
+  consent: {
+    label: "Cookie preferences",
+    text: "We use Google Analytics to see which pages get read and what is worth improving. Statistics cookies only start if you accept.",
+    policy: "Cookie policy",
+    accept: "Accept",
+    reject: "Decline",
   },
 };

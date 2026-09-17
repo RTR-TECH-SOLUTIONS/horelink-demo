@@ -1,0 +1,103 @@
+---
+import LegalPage from "../../components/LegalPage.astro";
+import { COMPANY } from "../../data/company";
+import { legalHref } from "../../i18n";
+---
+
+<LegalPage lang="en" page="termeni">
+  <p>
+    These terms apply to the <strong>{COMPANY.domain}</strong> website (the “website”). The website is operated
+    by <strong>{COMPANY.name}</strong> (“HoreLink”, “we” or “us”). By using the website, you agree to the terms
+    below.
+  </p>
+
+  <dl class="fisa">
+    <dt>Company name</dt>
+    <dd>{COMPANY.name}</dd>
+    <dt>Registered office</dt>
+    <dd>{COMPANY.address}, Romania</dd>
+    <dt>Tax ID (CUI)</dt>
+    <dd>{COMPANY.cui}</dd>
+    <dt>Trade Register no.</dt>
+    <dd>{COMPANY.regCom}</dd>
+    <dt>EUID</dt>
+    <dd>{COMPANY.euid}</dd>
+  </dl>
+
+  <h2 id="the-website">1. What the website is</h2>
+  <p>
+    The website presents the HoreLink mobile app, which connects hospitality professionals with restaurants,
+    bars, hotels, catering companies and event organisers for one-off collaborations. From the website you can
+    download the app from Google Play or the App Store and write to us on WhatsApp through the contact form.
+  </p>
+  <p>No accounts are created, no listings are published and no payments are made on the website.</p>
+
+  <h2 id="the-app">2. The mobile app</h2>
+  <p>
+    Your account, profile, published events and applications are managed only inside the app. These terms cover
+    the website alone. Use of the app is subject to the conditions that apply to the app and to the store you
+    download it from (Google Play or the App Store).
+  </p>
+
+  <h2 id="information">3. Information on the website</h2>
+  <p>
+    The texts, screenshots and images on the website are for presentation. Sample events and listings (for
+    example “End-of-year corporate gala”) are illustrative and are not real offers. Which events, roles and
+    spots are available is shown in the app, depending on what users publish at that time.
+  </p>
+
+  <h2 id="acceptable-use">4. Acceptable use</h2>
+  <p>When using the website, you agree not to:</p>
+  <ul>
+    <li>attempt unauthorised access to the website, its servers or other people's data;</li>
+    <li>disrupt the website, for example through excessive automated traffic or malicious code;</li>
+    <li>use the contact form for unsolicited commercial messages or unlawful content.</li>
+  </ul>
+
+  <h2 id="intellectual-property">5. Intellectual property</h2>
+  <p>
+    The HoreLink name, logo, texts, images and website design belong to {COMPANY.name} or are used under a
+    licence. You may not copy, modify or use them commercially without our written consent. Google Play is a
+    trademark of Google LLC and App Store is a trademark of Apple Inc.
+  </p>
+
+  <h2 id="external-links">6. Links to other services</h2>
+  <p>
+    The website links to Google Play, the App Store and WhatsApp. These services have their own terms and privacy
+    policies, for which we are not responsible. Please read them before using those services.
+  </p>
+
+  <h2 id="liability">7. Liability</h2>
+  <p>
+    We do our best to keep the information on the website accurate and up to date, but we cannot guarantee that
+    it is error-free or that the website is always available. The website may be temporarily unavailable for
+    maintenance or for technical reasons. To the extent permitted by law, we are not liable for indirect damage
+    resulting from the use of the website.
+  </p>
+
+  <h2 id="personal-data">8. Personal data and cookies</h2>
+  <p>
+    How we process personal data is explained in our <a href={legalHref("confidentialitate", "en")}>Privacy policy</a>,
+    and the cookies we use are listed in our <a href={legalHref("cookies", "en")}>Cookie policy</a>.
+  </p>
+
+  <h2 id="changes">9. Changes to these terms</h2>
+  <p>
+    We may update these terms, for example when the website or the law changes. The date of the last update is
+    shown at the top of this page. The version published here applies from that date.
+  </p>
+
+  <h2 id="governing-law">10. Governing law</h2>
+  <p>
+    These terms are governed by Romanian law. We will first try to settle any disagreement amicably; if that is
+    not possible, the competent courts in Romania have jurisdiction. If you are a consumer, you may also contact
+    the Romanian National Authority for Consumer Protection
+    (<a href="https://anpc.ro/" target="_blank" rel="noopener">anpc.ro</a>).
+  </p>
+
+  <h2 id="contact">11. Contact</h2>
+  <p>
+    For any question about these terms, write to <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> or call{" "}
+    <a href={COMPANY.phoneHref}>+40 {COMPANY.phone.slice(1)}</a>.
+  </p>
+</LegalPage>

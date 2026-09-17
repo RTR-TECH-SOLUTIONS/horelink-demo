@@ -1,6 +1,7 @@
 ---
 import { PLAY_URL, APPSTORE_URL } from "../data/app";
-import { t, base, type Lang } from "../i18n";
+import { COMPANY } from "../data/company";
+import { t, base, legalHref, type Lang } from "../i18n";
 import { url } from "../lib/url";
 
 interface Props {
@@ -11,12 +12,19 @@ const { lang } = Astro.props;
 const d = t(lang);
 const an = new Date().getFullYear();
 
+const home = base(lang);
 const navigare = [
-  { href: "#cum-functioneaza", label: d.nav.cum },
-  { href: "#personal", label: d.nav.personal },
-  { href: "#companii", label: d.nav.angajatori },
-  { href: "#evenimente", label: d.footer.evenimenteLabel },
-  { href: "#contact", label: d.nav.contact },
+  { href: `${home}#cum-functioneaza`, label: d.nav.cum },
+  { href: `${home}#personal`, label: d.nav.personal },
+  { href: `${home}#companii`, label: d.nav.angajatori },
+  { href: `${home}#evenimente`, label: d.footer.evenimenteLabel },
+  { href: `${home}#contact`, label: d.nav.contact },
+];
+
+const legal = [
+  { href: legalHref("termeni", lang), label: d.legal.termeni.nav },
+  { href: legalHref("confidentialitate", lang), label: d.legal.confidentialitate.nav },
+  { href: legalHref("cookies", lang), label: d.legal.cookies.nav },
 ];
 ---
 
@@ -45,12 +53,26 @@ const navigare = [
           <li><a href={APPSTORE_URL} target="_blank" rel="noopener">App Store</a></li>
         </ul>
       </div>
+
+      <div>
+        <h2>{d.footer.legalTitle}</h2>
+        <ul>
+          {legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          <li>
+            <button type="button" class="link-button" data-consent-open>
+              {d.footer.cookieSettings}
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="bottom">
-      <p>&copy; {an} {d.footer.copyright}</p>
-      {/* TODO(real): aici intra pachetul legal (Termeni, Confidențialitate,
-          Politica de cookies) și creditul RTR, la proiectul real. */}
+      <p>&copy; {an} {COMPANY.name} &middot; CUI {COMPANY.cui}</p>
+      <p class="credit">
+        {d.footer.credit}{" "}
+        <a href="https://rtrsolutions.ro" target="_blank" rel="noopener">RTR Solutions</a>
+      </p>
     </div>
   </div>
 </footer>
@@ -70,10 +92,24 @@ const navigare = [
     border-block-end: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 560px) {
     .top {
-      grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .top {
+      grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: 2.5rem;
+    }
+
+    .about {
+      grid-column: auto;
     }
   }
 
@@ -118,15 +154,27 @@ const navigare = [
     gap: 0.6rem;
   }
 
-  a:not(.brand) {
+  a:not(.brand),
+  .link-button {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-size: 0.94rem;
     transition: color 180ms var(--ease);
   }
 
-  a:not(.brand):hover {
+  a:not(.brand):hover,
+  .link-button:hover {
     color: #fff;
+  }
+
+  .link-button {
+    padding: 0;
+    background: none;
+    border: 0;
+    font-family: inherit;
+    line-height: inherit;
+    text-align: start;
+    cursor: pointer;
   }
 
   .bottom {
@@ -139,7 +187,14 @@ const navigare = [
     color: rgba(255, 255, 255, 0.5);
   }
 
-  .credit span {
+  .bottom a {
+    font-size: inherit;
+  }
+
+  .credit a {
     color: rgba(255, 255, 255, 0.78);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.3);
+    text-underline-offset: 3px;
   }
 </style>

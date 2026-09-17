@@ -1,15 +1,24 @@
 ---
 import "../styles/global.css";
-import { t, LANGS, base, type Lang } from "../i18n";
+import { Font } from "astro:assets";
+import CookieConsent from "../components/CookieConsent.astro";
+import { t, LANGS, HOME_ROUTES, type Lang } from "../i18n";
 import { url } from "../lib/url";
 
 interface Props {
   lang: Lang;
+  /** titlul si descrierea paginii; pe home raman cele din dictionar */
+  title?: string;
+  description?: string;
+  /** aceeasi pagina in fiecare limba, fara base (pentru canonical si hreflang) */
+  paths?: Record<Lang, string>;
 }
 
-const { lang } = Astro.props;
+const { lang, title, description, paths = HOME_ROUTES } = Astro.props;
 const d = t(lang);
 const site = Astro.site?.origin ?? "https://horelink.ro";
+const pageTitle = title ?? d.meta.title;
+const pageDescription = description ?? d.meta.description;
 ---
 
 <!doctype html>
@@ -17,28 +26,24 @@ const site = Astro.site?.origin ?? "https://horelink.ro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{d.meta.title}</title>
-    <meta name="description" content={d.meta.description} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
     <link rel="icon" type="image/png" href={url("/favicon.png")} />
     <link rel="apple-touch-icon" href={url("/apple-touch-icon.png")} />
     <meta name="theme-color" content="#0a0a0b" />
     {/* preview pentru client: nu se indexeaza pana nu merge pe domeniul propriu */}
     <meta name="robots" content="noindex, nofollow" />
 
-    <link rel="canonical" href={`${site}${base(lang)}`} />
-    {LANGS.map((l) => <link rel="alternate" hreflang={l} href={`${site}${base(l)}`} />)}
-    <link rel="alternate" hreflang="x-default" href={`${site}${url("/")}`} />
+    <link rel="canonical" href={`${site}${url(paths[lang])}`} />
+    {LANGS.map((l) => <link rel="alternate" hreflang={l} href={`${site}${url(paths[l])}`} />)}
+    <link rel="alternate" hreflang="x-default" href={`${site}${url(paths.ro)}`} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-    />
+    <Font cssVariable="--font-archivo" preload={[{ subset: "latin" }]} />
+    <Font cssVariable="--font-inter" preload={[{ subset: "latin" }]} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={d.meta.title} />
-    <meta property="og:description" content={d.meta.description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:locale" content={lang === "ro" ? "ro_RO" : "en_GB"} />
   </head>
   <body>
@@ -49,6 +54,7 @@ const site = Astro.site?.origin ?? "https://horelink.ro";
       {d.a11y.skip}
     </a>
     <slot />
+    <CookieConsent lang={lang} />
 
     <script>
       // Entrance discret pe sectiuni. Fara IntersectionObserver ar aparea totul deodata.

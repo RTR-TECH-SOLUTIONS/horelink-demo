@@ -1,0 +1,103 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { COMPANY } from "../data/company";
+import { legalHref } from "../i18n";
+---
+
+<LegalPage lang="ro" page="cookies">
+  <p>
+    Această politică explică ce cookie-uri și ce tehnologii similare folosește site-ul{" "}
+    <strong>{COMPANY.domain}</strong>, operat de {COMPANY.name}, și cum îți poți da sau retrage acordul.
+  </p>
+
+  <h2 id="ce-sunt">1. Ce sunt cookie-urile</h2>
+  <p>
+    Cookie-urile sunt fișiere mici pe care un site le salvează în browserul tău. Unele sunt necesare ca site-ul
+    să funcționeze, altele ajută la măsurarea vizitelor. Stocarea locală a browserului (localStorage)
+    funcționează asemănător și o tratăm la fel în această politică.
+  </p>
+
+  <h2 id="ce-folosim">2. Ce folosim</h2>
+  <p>
+    Pe site folosim doar două categorii: o informație strict necesară, care reține alegerea ta, și
+    cookie-urile de statistică Google Analytics, care pornesc doar dacă accepți. Nu folosim cookie-uri de
+    publicitate și nu te urmărim pe alte site-uri.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Nume</th>
+          <th scope="col">Categorie</th>
+          <th scope="col">Furnizor</th>
+          <th scope="col">La ce servește</th>
+          <th scope="col">Durată</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>horelink-consent</code></td>
+          <td>Strict necesar (stocare locală)</td>
+          <td>HoreLink</td>
+          <td>Reține dacă ai acceptat sau ai refuzat cookie-urile de statistică.</td>
+          <td>6 luni</td>
+        </tr>
+        <tr>
+          <td><code>_ga</code></td>
+          <td>Statistică, doar cu acord</td>
+          <td>Google Analytics</td>
+          <td>Deosebește vizitatorii între ei, fără să îi identifice.</td>
+          <td>2 ani</td>
+        </tr>
+        <tr>
+          <td><code>_ga_&lt;ID&gt;</code></td>
+          <td>Statistică, doar cu acord</td>
+          <td>Google Analytics</td>
+          <td>Păstrează starea sesiunii de vizită.</td>
+          <td>2 ani</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    Informația strict necesară nu are nevoie de acordul tău, pentru că fără ea nu am putea respecta alegerea
+    pe care ai făcut-o. Cookie-urile Google Analytics nu sunt create și scriptul Google nu se încarcă până nu
+    apeși „Accept”.
+  </p>
+
+  <h2 id="acord">3. Cum îți dai sau îți retragi acordul</h2>
+  <ul>
+    <li>La prima vizită îți apare un banner în care poți alege „Accept” sau „Refuz”.</li>
+    <li>
+      Îți poți schimba alegerea oricând din linkul „Setări cookie” din subsolul site-ului. Dacă refuzi după ce
+      ai acceptat, ștergem cookie-urile Google Analytics create de site.
+    </li>
+    <li>
+      Poți șterge sau bloca cookie-urile din setările browserului. Dacă ștergi datele site-ului, bannerul va
+      apărea din nou.
+    </li>
+    <li>
+      Poți bloca Google Analytics pe toate site-urile cu extensia oficială Google
+      (<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>).
+    </li>
+  </ul>
+
+  <h2 id="alte-servicii">4. Linkuri către alte servicii</h2>
+  <p>
+    Când apeși pe linkurile către Google Play, App Store sau WhatsApp, părăsești site-ul nostru. Aceste servicii
+    pot folosi propriile cookie-uri, conform politicilor lor, asupra cărora nu avem control.
+  </p>
+
+  <h2 id="date-personale">5. Date personale</h2>
+  <p>
+    Cum prelucrăm datele obținute prin Google Analytics și prin formularul de contact afli din{" "}
+    <a href={legalHref("confidentialitate", "ro")}>Politica de confidențialitate</a>.
+  </p>
+
+  <h2 id="contact">6. Contact</h2>
+  <p>
+    Pentru întrebări despre cookie-uri ne găsești la <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
+  </p>
+</LegalPage>

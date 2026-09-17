@@ -23,4 +23,19 @@ export function base(lang: Lang): string {
   return url(lang === DEFAULT_LANG ? "/" : `/${lang}/`);
 }
 
+/** Paginile legale au slug-uri diferite pe fiecare limba. */
+export type LegalPage = "termeni" | "confidentialitate" | "cookies";
+
+export const LEGAL_ROUTES: Record<LegalPage, Record<Lang, string>> = {
+  termeni: { ro: "/termeni-si-conditii/", en: "/en/terms/" },
+  confidentialitate: { ro: "/politica-de-confidentialitate/", en: "/en/privacy-policy/" },
+  cookies: { ro: "/politica-de-cookies/", en: "/en/cookie-policy/" },
+};
+
+export const HOME_ROUTES: Record<Lang, string> = { ro: "/", en: "/en/" };
+
+export function legalHref(page: LegalPage, lang: Lang): string {
+  return url(LEGAL_ROUTES[page][lang]);
+}
+
 export type { Dict };
