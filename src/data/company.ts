@@ -24,3 +24,19 @@ export const GA_ID = "";
 
 /** Data afisata in capul paginilor legale. */
 export const LEGAL_UPDATED = { ro: "17 septembrie 2026", en: "17 September 2026" } as const;
+
+/** Adresa canonica a site-ului in productie. */
+export const SITE_URL = "https://horelink.ro";
+
+/**
+ * Doar build-ul de productie se indexeaza. Demo-ul de pe GitHub Pages ramane noindex,
+ * ca sa nu concureze in Google cu domeniul real.
+ */
+export const INDEXABLE = import.meta.env.SITE === SITE_URL;
+
+/**
+ * Codul de verificare Google Search Console, daca se alege metoda cu meta tag
+ * (continutul atributului content="..."). Gol = nu se afiseaza.
+ * Varianta recomandata ramane verificarea prin DNS (record TXT la cyberfolks).
+ */
+export const GSC_VERIFICATION = "";

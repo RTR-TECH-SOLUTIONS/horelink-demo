@@ -15,15 +15,17 @@ import Descarca from "./Descarca.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import type { Lang } from "../i18n";
+import { schemaHelpers } from "../lib/schema";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+const schema = schemaHelpers(Astro.site ?? new URL("https://horelink.ro")).homeGraph(lang);
 ---
 
-<Layout lang={lang}>
+<Layout lang={lang} schema={schema}>
   <Header lang={lang} />
   <main id="continut">
     <Hero lang={lang} />

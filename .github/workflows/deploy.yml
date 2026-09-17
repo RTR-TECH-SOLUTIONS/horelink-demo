@@ -30,8 +30,10 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Build
+      - name: Build (demo, noindex)
         run: npm run build
+        env:
+          DEPLOY_TARGET: demo
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

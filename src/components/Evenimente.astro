@@ -4,9 +4,12 @@ import { url } from "../lib/url";
 
 interface Props {
   lang: Lang;
+  /** paginile pe audiente isi pun propriul titlu, cu keyword-ul lor */
+  title?: string;
+  intro?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, title, intro } = Astro.props;
 const d = t(lang).evenimente;
 
 // Tipurile sunt exact cele enumerate de aplicatie in descrierea din magazine.
@@ -16,8 +19,8 @@ const slugs = ["nunta", "craciun", "conferinta", "rooftop", "festival", "restaur
 <section class="section evenimente" id="evenimente">
   <div class="wrap">
     <div class="head reveal">
-      <h2>{d.title}</h2>
-      <p>{d.intro}</p>
+      <h2>{title ?? d.title}</h2>
+      <p>{intro ?? d.intro}</p>
     </div>
 
     <ul class="galerie">

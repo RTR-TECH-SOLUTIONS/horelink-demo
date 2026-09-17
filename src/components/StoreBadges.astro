@@ -22,7 +22,7 @@ const apple = url(lang === "ro" ? "/app/badge-app-store.svg" : "/app/badge-app-s
 
 <div class:list={["store-badges", className]} style={`--badge-h:${h}`}>
   <a class="store-badge" href={PLAY_URL} target="_blank" rel="noopener" aria-label={a.playBadge}>
-    <img src={play} alt={a.playAlt} width="646" height="250" />
+    <img src={play} alt={a.playAlt} width="388" height="150" />
   </a>
   <a
     class="store-badge"
@@ -38,6 +38,9 @@ const apple = url(lang === "ro" ? "/app/badge-app-store.svg" : "/app/badge-app-s
 <style>
   .store-badges :global(img) {
     height: var(--badge-h);
+    width: auto;
+    /* fara asta, max-width: 100% din reset turteste badge-ul in containerul flex */
+    max-width: none;
   }
 
   /* badge-ul Google are padding transparent propriu, deci are nevoie de

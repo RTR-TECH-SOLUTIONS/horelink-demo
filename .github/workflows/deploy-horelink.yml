@@ -1,0 +1,67 @@
+name: Deploy pe horelink.ro (cyberfolks)
+
+# Build de productie (indexabil, la radacina) urcat prin FTPS pe hostingul clientului.
+# Pana se adauga secretele FTP_SERVER / FTP_USERNAME / FTP_PASSWORD in GitHub,
+# workflow-ul se opreste la primul pas, fara eroare.
+#
+# Optional, ca variabile de repo (Settings > Secrets and variables > Actions > Variables):
+#   FTP_SERVER_DIR  implicit ./domains/horelink.ro/public_html/  (structura DirectAdmin)
+#   FTP_PROTOCOL    implicit ftps
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: horelink-ro
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - name: Verifica datele FTP
+        id: check
+        run: |
+          if [ -z "$FTP_SERVER" ]; then
+            echo "::notice::Secretele FTP nu sunt setate, deploy-ul pe horelink.ro se sare."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        if: steps.check.outputs.ready == 'true'
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        if: steps.check.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        if: steps.check.outputs.ready == 'true'
+        run: npm ci
+
+      - name: Build (productie)
+        if: steps.check.outputs.ready == 'true'
+        run: npm run build
+
+      - name: Upload FTPS
+        if: steps.check.outputs.ready == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./dist/
+          server-dir: ${{ vars.FTP_SERVER_DIR || './domains/horelink.ro/public_html/' }}

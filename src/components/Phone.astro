@@ -5,10 +5,23 @@ interface Props {
   /** dimensiunile reale ale capturii, ca sa nu sara layoutul la incarcare */
   width: number;
   height: number;
+  /** varianta de 600px (acopera telefonul de 280px pe ecrane 2x); telefonul nu trece niciodata de 280px lat */
+  srcSmall?: string;
+  /** latimea afisata a telefonului, ca browserul sa aleaga varianta potrivita */
+  sizes?: string;
   class?: string;
 }
 
-const { src, alt, width, height, class: className = "" } = Astro.props;
+const {
+  src,
+  alt,
+  width,
+  height,
+  srcSmall,
+  sizes = "min(280px, 72vw)",
+  class: className = "",
+} = Astro.props;
+const srcset = srcSmall ? `${srcSmall} 600w, ${src} ${width}w` : undefined;
 ---
 
 <div class:list={["phone", className]}>
@@ -16,7 +29,16 @@ const { src, alt, width, height, class: className = "" } = Astro.props;
     <span class="btn-volume" aria-hidden="true"></span>
     <span class="btn-power" aria-hidden="true"></span>
     <div class="screen">
-      <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+      <img
+        src={src}
+        srcset={srcset}
+        sizes={srcset ? sizes : undefined}
+        alt={alt}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+      />
       <span class="glare" aria-hidden="true"></span>
     </div>
   </div>

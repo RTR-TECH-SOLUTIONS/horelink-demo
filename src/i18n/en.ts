@@ -10,9 +10,10 @@ export const en: Dict = {
   short: "EN",
 
   meta: {
-    title: "HoreLink — hospitality staff and events, in one app",
+    title: "Hospitality staff for events in Romania | HoreLink",
     description:
-      "HoreLink connects hospitality professionals with restaurants, bars, hotels, catering companies and event organisers. Free on Android and iPhone.",
+      "Waiters, bartenders and chefs for events, straight from the app. For a single shift or for several. HoreLink is free to download on Android and iPhone.",
+    ogImageAlt: "HoreLink: Find the shift. Find the team. In one app. Waiters serving in an event hall.",
   },
 
   a11y: {
@@ -111,6 +112,7 @@ export const en: Dict = {
     ],
     phoneAlt:
       "An event detail in the HoreLink app: location, hours, work days, available positions and the status of your application",
+    more: "Everything about event work",
   },
 
   angajatori: {
@@ -125,6 +127,7 @@ export const en: Dict = {
     ],
     phoneAlt: "The events list in the HoreLink app, showing a published Christmas market listing",
     photoAlt: "An event manager checking a list in a hall being set up for a dinner",
+    more: "How to find waiters for events",
   },
 
   evenimente: {
@@ -244,6 +247,122 @@ export const en: Dict = {
     legalTitle: "Legal",
     cookieSettings: "Cookie settings",
     credit: "Website by",
+  },
+
+  audience: {
+    companii: {
+      title: "Waiters and bartenders for events in Romania | HoreLink",
+      description:
+        "Find waiters, bartenders, chefs and hosts for weddings, galas, conferences or festivals. Post your event in the HoreLink app and choose your team.",
+      crumb: "For businesses",
+      h1Pre: "Waiters and bartenders for ",
+      h1Accent: "events",
+      h1Post: "",
+      lede: "Post your event in HoreLink with the date, the hours and how many people you need on each role. Hospitality professionals apply and you choose the team. For a single shift or for several.",
+      fine: "The app is free to download on Android and iPhone.",
+      photoAlt: "An event manager checking a list in a hall being set up for a dinner",
+      phoneAlt: "The events list in the HoreLink app, showing a published Christmas market listing",
+      stepsTitle: "How to find hospitality staff for an event",
+      stepsIntro: "Three steps, from the listing to a confirmed team.",
+      rolesTitle: "Roles you can staff",
+      rolesIntro: "The roles covered by the app. One listing can look for every role you need.",
+      roles: [
+        { nume: "Waiters", text: "Table service for weddings, christenings, dinners and galas." },
+        { nume: "Bartenders", text: "Cocktail bars at private parties, festivals and rooftop evenings." },
+        { nume: "Baristas", text: "Coffee at conferences, coffee breaks and corporate events." },
+        { nume: "Chefs", text: "Hot kitchen at events and on busy restaurant days." },
+        { nume: "Kitchen assistants", text: "Prep, platters and buffet, alongside the chefs." },
+        { nume: "Hosts", text: "Welcoming guests and guiding them at the entrance." },
+        { nume: "Event staff", text: "Extra hands wherever the event needs them." },
+      ],
+      eventsTitle: "What kind of events",
+      eventsIntro:
+        "From a one-night wedding to a six-week Christmas market. You post the event once, with every work day.",
+      faqTitle: "Questions about finding staff",
+      faq: [
+        {
+          q: "How do I find waiters for an event?",
+          a: "Download HoreLink, post the event with the date, hours, location and how many waiters you need, then choose from the professionals who apply.",
+        },
+        {
+          q: "Can I look for several roles for the same event?",
+          a: "Yes. One listing can include every role, for example waiters, bartenders and kitchen assistants, each with its own number of spots.",
+        },
+        {
+          q: "Can I see people's experience before accepting them?",
+          a: "Yes. Every application comes with the person's profile, their experience and the roles they can cover.",
+        },
+        {
+          q: "Can I post an event that runs for several days?",
+          a: "Yes. You set the start and end date, and the app shows how many work days the event has, from one evening to a market lasting weeks.",
+        },
+        {
+          q: "What kind of events can I find staff for?",
+          a: "Weddings and christenings, conferences and corporate galas, festivals, markets, rooftop evenings and busy days in restaurants and bars.",
+        },
+        {
+          q: "Which phones does the app work on?",
+          a: "HoreLink is free to download from Google Play for Android and from the App Store for iPhone.",
+        },
+      ],
+    },
+    personal: {
+      title: "Event work for waiters and bartenders in Romania | HoreLink",
+      description:
+        "Waiter, bartender, barista or chef shifts at events, weekends included. See the hours and location, apply in the app and choose where you work.",
+      crumb: "For staff",
+      h1Pre: "Event work, on shifts ",
+      h1Accent: "you",
+      h1Post: " choose",
+      lede: "Waiter, bartender, barista, chef or host? In HoreLink you see the events coming up, with the hours, location and work days, and you only apply to the shifts that suit you, whether it is a weekend evening or an event over several days.",
+      fine: "The app is free to download on Android and iPhone.",
+      photoAlt: "A bartender straining a cocktail into a coupe at a bar lit in red",
+      phoneAlt:
+        "An event detail in the HoreLink app: location, hours, work days, available positions and the status of your application",
+      stepsTitle: "How you get to work at an event",
+      stepsIntro: "Three steps, from your profile to a confirmed shift.",
+      rolesTitle: "Roles you can work",
+      rolesIntro: "Add the roles you can cover to your profile and apply only to listings looking for them.",
+      roles: [
+        { nume: "Waiter", text: "Table service at weddings, christenings, dinners and galas." },
+        { nume: "Bartender", text: "Bars at private parties, festivals and rooftop evenings." },
+        { nume: "Barista", text: "Coffee at conferences and corporate events." },
+        { nume: "Chef", text: "Hot kitchen at events and on busy restaurant days." },
+        { nume: "Kitchen assistant", text: "Prep, platters and buffet, next to the kitchen team." },
+        { nume: "Host", text: "Welcoming guests and guiding them at the event." },
+        { nume: "Event staff", text: "Support for the team wherever the event needs extra hands." },
+      ],
+      eventsTitle: "Where the work happens",
+      eventsIntro:
+        "From a rooftop cocktail evening to six weeks of Christmas market. The same roles, completely different settings.",
+      faqTitle: "Questions about event work",
+      faq: [
+        {
+          q: "How do I find waiter shifts at events?",
+          a: "Create a HoreLink profile with your experience and the roles you cover, then browse the upcoming events and apply to the ones that suit you.",
+        },
+        {
+          q: "Can I work only at weekends?",
+          a: "Yes. You choose which events to apply to, and every listing shows the date, hours and number of work days, so you can apply only to weekend shifts.",
+        },
+        {
+          q: "What do I see before applying?",
+          a: "The start and end date, the hours, the full address on a map, the number of work days and how many spots are still open on each role.",
+        },
+        {
+          q: "How do I know if I was accepted?",
+          a: "The app tracks every application and shows whether it is under review, accepted or withdrawn.",
+        },
+        {
+          q: "Can I withdraw after applying?",
+          a: "Yes. You can withdraw your application directly in the app.",
+        },
+        {
+          q: "Which phones does the app work on?",
+          a: "HoreLink is free to download from Google Play for Android and from the App Store for iPhone.",
+        },
+      ],
+    },
   },
 
   legal: {

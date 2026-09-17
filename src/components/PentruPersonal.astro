@@ -1,7 +1,7 @@
 ---
 import Phone from "./Phone.astro";
 import StoreBadges from "./StoreBadges.astro";
-import { t, type Lang } from "../i18n";
+import { t, audienceHref, type Lang } from "../i18n";
 import { url } from "../lib/url";
 
 interface Props {
@@ -16,6 +16,8 @@ const d = t(lang).personal;
   <img
     class="bg"
     src={url("/img/personal-1000.webp")}
+    srcset={`${url("/img/personal-640.webp")} 640w, ${url("/img/personal-1000.webp")} 1000w`}
+    sizes="(min-width: 900px) 62vw, 100vw"
     alt=""
     width="1000"
     height="664"
@@ -46,11 +48,19 @@ const d = t(lang).personal;
         }
       </ul>
 
+      <a class="more" href={audienceHref("personal", lang)}>{d.more}</a>
+
       <StoreBadges lang={lang} class="badges" />
     </div>
 
     <div class="visual reveal">
-      <Phone src={url("/app/screen-detaliu.webp")} alt={d.phoneAlt} width={840} height={1706} />
+      <Phone
+        src={url("/app/screen-detaliu.webp")}
+        srcSmall={url("/app/screen-detaliu-600.webp")}
+        alt={d.phoneAlt}
+        width={840}
+        height={1706}
+      />
     </div>
   </div>
 </section>
@@ -120,6 +130,23 @@ const d = t(lang).personal;
   }
 
   /* StoreBadges e alta componenta, stilul scoped nu ajunge la ea fara :global */
+  .more {
+    display: inline-block;
+    margin-block-start: 1.9rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: var(--color-brand);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    transition: text-underline-offset 180ms var(--ease);
+  }
+
+  .more:hover {
+    text-underline-offset: 7px;
+  }
+
   .copy :global(.badges) {
     margin-block-start: 2.4rem;
   }

@@ -8,9 +8,10 @@ export const ro = {
   short: "RO",
 
   meta: {
-    title: "HoreLink — personal și evenimente HoReCa, în aceeași aplicație",
+    title: "Personal HoReCa pentru evenimente, într-o aplicație | HoreLink",
     description:
-      "HoreLink conectează profesioniștii din ospitalitate cu restaurantele, barurile, hotelurile, firmele de catering și organizatorii de evenimente. Gratuit pe Android și iPhone.",
+      "Ospătari, barmani și bucătari pentru evenimente, direct din aplicație. Pentru o singură tură sau mai multe. HoreLink se descarcă gratuit pe Android și iPhone.",
+    ogImageAlt: "HoreLink: Găsești tura. Găsești echipa. În aceeași aplicație. Ospătari servind într-o sală de evenimente.",
   },
 
   a11y: {
@@ -109,6 +110,7 @@ export const ro = {
     ],
     phoneAlt:
       "Detaliul unui eveniment în aplicația HoreLink: locație, interval orar, zile de lucru, pozițiile disponibile și starea aplicării tale",
+    more: "Tot despre lucrul la evenimente",
   },
 
   angajatori: {
@@ -124,6 +126,7 @@ export const ro = {
     phoneAlt:
       "Lista de evenimente din aplicația HoreLink, cu un anunț publicat pentru un târg de Crăciun",
     photoAlt: "Coordonator de eveniment verificând lista într-o sală pregătită pentru un dineu",
+    more: "Cum găsești ospătari pentru evenimente",
   },
 
   evenimente: {
@@ -244,6 +247,122 @@ export const ro = {
     legalTitle: "Informații legale",
     cookieSettings: "Setări cookie",
     credit: "Site realizat de",
+  },
+
+  audience: {
+    companii: {
+      title: "Ospătari și barmani pentru evenimente | HoreLink",
+      description:
+        "Găsești ospătari, barmani, bucătari și hostess pentru nunți, gale, conferințe sau festivaluri. Publici evenimentul în aplicația HoreLink și alegi echipa.",
+      crumb: "Pentru companii",
+      h1Pre: "Ospătari și barmani pentru ",
+      h1Accent: "evenimente",
+      h1Post: "",
+      lede: "Publici evenimentul în HoreLink, cu data, intervalul orar și câți oameni îți trebuie pe fiecare poziție. Profesioniștii din ospitalitate aplică, iar tu alegi echipa. Pentru o singură tură sau mai multe.",
+      fine: "Aplicația se descarcă gratuit, pe Android și pe iPhone.",
+      photoAlt: "Coordonator de eveniment verificând lista într-o sală pregătită pentru un dineu",
+      phoneAlt: "Lista de evenimente din aplicația HoreLink, cu un anunț publicat pentru un târg de Crăciun",
+      stepsTitle: "Cum găsești personal HoReCa pentru un eveniment",
+      stepsIntro: "Trei pași, de la anunț până la echipa confirmată.",
+      rolesTitle: "Pe ce poziții găsești oameni",
+      rolesIntro: "Pozițiile pe care le acoperă aplicația. Într-un singur anunț le poți căuta pe toate de care ai nevoie.",
+      roles: [
+        { nume: "Ospătari", text: "Serviciu la masă pentru nunți, botezuri, dineuri și gale." },
+        { nume: "Barmani", text: "Bar de cocktailuri la petreceri private, festivaluri și seri pe rooftop." },
+        { nume: "Barista", text: "Cafea la conferințe, pauze de cafea și evenimente corporate." },
+        { nume: "Bucătari", text: "Bucătărie caldă la evenimente și în zilele aglomerate din restaurant." },
+        { nume: "Ajutor bucătărie", text: "Pregătire, platouri și bufet, alături de bucătari." },
+        { nume: "Hostess", text: "Primirea invitaților și orientarea lor la intrare." },
+        { nume: "Personal de eveniment", text: "Oameni în plus acolo unde evenimentul are nevoie de ei." },
+      ],
+      eventsTitle: "Pentru ce evenimente",
+      eventsIntro:
+        "De la o nuntă de o seară până la un târg de Crăciun de șase săptămâni. Publici evenimentul o singură dată, cu toate zilele de lucru.",
+      faqTitle: "Întrebări despre găsirea de personal",
+      faq: [
+        {
+          q: "Cum găsesc ospătari pentru un eveniment?",
+          a: "Descarci HoreLink, publici evenimentul cu data, intervalul orar, locația și numărul de ospătari de care ai nevoie, apoi alegi dintre profesioniștii care aplică.",
+        },
+        {
+          q: "Pot căuta mai multe poziții pentru același eveniment?",
+          a: "Da. Într-un singur anunț adaugi toate pozițiile, de exemplu ospătari, barmani și ajutor de bucătărie, fiecare cu numărul lui de locuri.",
+        },
+        {
+          q: "Văd experiența oamenilor înainte să îi accept?",
+          a: "Da. Fiecare aplicare vine cu profilul persoanei, experiența ei și pozițiile pe care le acoperă.",
+        },
+        {
+          q: "Pot publica un eveniment care ține mai multe zile?",
+          a: "Da. Treci în anunț data de început și de final, iar aplicația arată câte zile de lucru are evenimentul, de la o seară până la un târg de câteva săptămâni.",
+        },
+        {
+          q: "Pentru ce tipuri de evenimente pot căuta personal?",
+          a: "Pentru nunți și botezuri, conferințe și gale corporate, festivaluri, târguri, seri pe rooftop și pentru zilele aglomerate din restaurante și baruri.",
+        },
+        {
+          q: "Pe ce telefoane funcționează aplicația?",
+          a: "HoreLink se descarcă gratuit din Google Play, pentru Android, și din App Store, pentru iPhone.",
+        },
+      ],
+    },
+    personal: {
+      title: "Lucru la evenimente ca ospătar sau barman | HoreLink",
+      description:
+        "Ture de ospătar, barman, barista sau bucătar la evenimente, inclusiv în weekend. Vezi intervalul orar și locația, aplici din aplicație și alegi singur unde lucrezi.",
+      crumb: "Pentru personal",
+      h1Pre: "Lucru la evenimente, pe ture ",
+      h1Accent: "alese",
+      h1Post: " de tine",
+      lede: "Ospătar, barman, barista, bucătar sau hostess? În HoreLink vezi evenimentele din perioada următoare, cu intervalul orar, locația și zilele de lucru, și aplici doar la turele care ți se potrivesc, fie o seară în weekend, fie un eveniment de mai multe zile.",
+      fine: "Aplicația se descarcă gratuit, pe Android și pe iPhone.",
+      photoAlt: "Barman strecurând un cocktail într-un pahar, la un bar luminat în roșu",
+      phoneAlt:
+        "Detaliul unui eveniment în aplicația HoreLink: locație, interval orar, zile de lucru, pozițiile disponibile și starea aplicării tale",
+      stepsTitle: "Cum ajungi să lucrezi la un eveniment",
+      stepsIntro: "Trei pași, de la profil până la tura confirmată.",
+      rolesTitle: "Pe ce poziții poți lucra",
+      rolesIntro: "Îți treci în profil pozițiile pe care le acoperi și aplici doar la anunțurile care le caută.",
+      roles: [
+        { nume: "Ospătar", text: "Serviciu la masă la nunți, botezuri, dineuri și gale." },
+        { nume: "Barman", text: "Bar la petreceri private, festivaluri și seri pe rooftop." },
+        { nume: "Barista", text: "Cafea la conferințe și la evenimente corporate." },
+        { nume: "Bucătar", text: "Bucătărie caldă la evenimente și în zilele aglomerate din restaurante." },
+        { nume: "Ajutor bucătărie", text: "Pregătire, platouri și bufet, lângă echipa de bucătari." },
+        { nume: "Hostess", text: "Primirea invitaților și orientarea lor la eveniment." },
+        { nume: "Personal de eveniment", text: "Sprijin pentru echipă acolo unde evenimentul are nevoie de oameni în plus." },
+      ],
+      eventsTitle: "Unde se lucrează",
+      eventsIntro:
+        "De la o seară de cocktailuri pe acoperiș până la șase săptămâni de târg de Crăciun. Aceleași poziții, contexte complet diferite.",
+      faqTitle: "Întrebări despre lucrul la evenimente",
+      faq: [
+        {
+          q: "Cum găsesc ture de ospătar la evenimente?",
+          a: "Îți faci profil în HoreLink cu experiența și pozițiile pe care le acoperi, apoi vezi evenimentele din perioada următoare și aplici la cele care ți se potrivesc.",
+        },
+        {
+          q: "Pot lucra doar în weekend?",
+          a: "Da. Alegi singur la ce evenimente aplici, iar în fiecare anunț vezi data, intervalul orar și câte zile de lucru are, așa că poți aplica doar la turele din weekend.",
+        },
+        {
+          q: "Ce văd înainte să aplic?",
+          a: "Data de început și de final, intervalul orar, adresa completă cu hartă, numărul de zile de lucru și câte locuri mai sunt libere pe fiecare poziție.",
+        },
+        {
+          q: "Cum aflu dacă am fost acceptat?",
+          a: "În aplicație urmărești fiecare aplicare și vezi dacă e în așteptare, acceptată sau retrasă.",
+        },
+        {
+          q: "Pot renunța după ce am aplicat?",
+          a: "Da. Îți poți retrage aplicarea direct din aplicație.",
+        },
+        {
+          q: "Pe ce telefoane funcționează aplicația?",
+          a: "HoreLink se descarcă gratuit din Google Play, pentru Android, și din App Store, pentru iPhone.",
+        },
+      ],
+    },
   },
 
   legal: {

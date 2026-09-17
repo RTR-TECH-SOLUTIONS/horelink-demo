@@ -98,10 +98,31 @@ aparte. Tokenii de design sunt în `src/styles/global.css`, în blocul `@theme`.
   keyworduri confirmată, apoi on-page: title/meta/H1, JSON-LD `SoftwareApplication` +
   `Organization`, `sitemap.xml`, `robots.txt`. Pagina EN primește propriul set de keyworduri,
   nu o traducere a celor românești.
-- Performanță la maxim: AVIF pe lângă WebP, `srcset` complet pe hero.
-- Deploy: build static, urcat pe hostingul clientului (**cyberfolks**, nu Hostinger). Domeniul
-  `horelink.ro` e deja cumpărat. La mutare: scoase `site`/`base` din `astro.config.mjs`,
-  `noindex` din `Layout.astro` și `Disallow` din `public/robots.txt`.
+- Lista de keyworduri confirmată cu Mario, apoi title/meta/H1 și paginile noi pe ea.
+
+## Producție (pregătit 17.09.2026)
+
+- **Două ținte din același cod** (`astro.config.mjs`): `npm run build` = producție pe
+  `https://horelink.ro`, la rădăcină, indexabilă. `DEPLOY_TARGET=demo npm run build` = demo-ul de pe
+  GitHub Pages, sub `/horelink-demo/`, cu `noindex` și `Disallow`. Workflow-ul Pages setează singur
+  variabila.
+- **SEO tehnic:** `robots.txt` și `sitemap.xml` generate (`src/pages/*.ts`, hreflang RO/EN pe fiecare
+  URL), canonical + hreflang + Open Graph + Twitter card pe toate paginile, imagini de share
+  `public/og/horelink-{ro,en}.jpg` (1200x630), JSON-LD `Organization` + `WebSite` +
+  `MobileApplication` pe home și `BreadcrumbList` pe paginile legale (`src/lib/schema.ts`),
+  pagină `404` (noindex).
+- **Performanță (Lighthouse mobil, build de producție):** home 99 / 100 / 100 / 100, paginile
+  legale 100 / 100 / 100 / 100, ~340 KB toată pagina. CSS inline, un singur fișier de font per
+  familie doar cu caracterele folosite (preîncărcat), `srcset` pe capturi și poze.
+- **Hosting cyberfolks** (LiteSpeed + DirectAdmin): `public/.htaccess` face redirect http/www ->
+  `https://horelink.ro`, slash final, cache lung pe `/_astro/`, headere de securitate și 404.
+  HSTS e comentat până se confirmă SSL-ul.
+- **Deploy automat** `.github/workflows/deploy-horelink.yml`: la push pe `main` face build de
+  producție și îl urcă prin FTPS. Se sare până se adaugă în GitHub secretele `FTP_SERVER`,
+  `FTP_USERNAME`, `FTP_PASSWORD` (și, dacă diferă, variabilele `FTP_SERVER_DIR`, implicit
+  `./domains/horelink.ro/public_html/`, și `FTP_PROTOCOL`, implicit `ftps`).
+- **Search Console:** verificare prin record TXT în DNS (recomandat) sau `GSC_VERIFICATION` în
+  `src/data/company.ts`; apoi trimis `https://horelink.ro/sitemap.xml`.
 
 ## Pachet legal (făcut, 17.09.2026)
 
