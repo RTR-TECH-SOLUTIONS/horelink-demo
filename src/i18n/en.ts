@@ -33,7 +33,7 @@ export const en: Dict = {
   nav: {
     cum: "How it works",
     personal: "For staff",
-    angajatori: "For employers",
+    angajatori: "For businesses",
     evenimente: "Events",
     contact: "Contact",
     cta: "Get the app",
@@ -45,7 +45,7 @@ export const en: Dict = {
     line3Pre: "In the ",
     line3Accent: "same",
     line3Post: " app.",
-    lede: "HoreLink puts hospitality professionals and the places that need them in the same room: restaurants, bars, hotels, catering companies and event organisers. For a single evening or for a whole season.",
+    lede: "HoreLink puts hospitality professionals and the places that need them in the same room: restaurants, bars, hotels, catering companies and event organisers. For a single shift or for several.",
     fine: "Free on Android and iPhone. You create your account inside the app.",
     imgAlt: "Waiters serving a long table in an event hall in the evening",
     pozitiiLabel: "Roles covered",
@@ -66,11 +66,11 @@ export const en: Dict = {
       "The same road, seen from two sides. Pick the side you are on and follow it, step by step.",
     tablistLabel: "Choose your perspective",
     tabPersonal: "I am staff",
-    tabAngajator: "I am an employer",
+    tabAngajator: "I need staff",
     personal: [
       {
         titlu: "Build your profile",
-        text: "Add your experience and the roles you can cover. Employers see exactly what you can do, with nobody in between.",
+        text: "Add your experience and the roles you can cover. Restaurants and organisers see exactly what you can do, with nobody in between.",
       },
       {
         titlu: "Browse the events",
@@ -121,7 +121,6 @@ export const en: Dict = {
       "Post an event in minutes, with the roles and the headcount you need.",
       "Reach hospitality professionals directly, with no agency in between.",
       "Every application on one screen, with each candidate's experience.",
-      "Hire for a single evening or for a permanent position.",
       "See the confirmed team before the event, not on the morning of it.",
     ],
     phoneAlt: "The events list in the HoreLink app, showing a published Christmas market listing",
@@ -160,7 +159,7 @@ export const en: Dict = {
       },
       restaurant: {
         nume: "Restaurants and bars",
-        text: "Not only events: permanent positions too, for the floor and the kitchen.",
+        text: "Not only events: shifts on the floor and in the kitchen, when the place is full.",
         alt: "A chef sending a plate at the pass in a professional kitchen",
       },
     },
@@ -207,7 +206,7 @@ export const en: Dict = {
 
   descarca: {
     title: "Get HoreLink",
-    text: "Free on Android and iPhone. You create your account in the app, choose whether you join as staff or as an employer, and everything starts from there.",
+    text: "Free on Android and iPhone. You create your account in the app, choose whether you join as staff or on behalf of a business, and everything starts from there.",
   },
 
   contact: {
@@ -221,7 +220,7 @@ export const en: Dict = {
     numeError: "Tell us what to call you.",
     rolLabel: "You are writing as",
     rolPersonal: "Hospitality staff",
-    rolAngajator: "Employer / organiser",
+    rolAngajator: "Business / organiser",
     mesajLabel: "Message",
     mesajError: "Tell us briefly what this is about.",
     submit: "Send on WhatsApp",
@@ -230,7 +229,7 @@ export const en: Dict = {
     fine: "WhatsApp opens with the message already written. You can edit it before sending.",
     waGreeting: "Hi! I am {nume}, writing as {rol}.",
     waRolPersonal: "hospitality staff",
-    waRolAngajator: "employer / organiser",
+    waRolAngajator: "business / organiser",
     waFooter: "(Sent from the HoreLink website)",
   },
 

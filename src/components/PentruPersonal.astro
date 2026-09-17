@@ -119,7 +119,8 @@ const d = t(lang).personal;
     color: rgba(255, 255, 255, 0.92);
   }
 
-  .badges {
+  /* StoreBadges e alta componenta, stilul scoped nu ajunge la ea fara :global */
+  .copy :global(.badges) {
     margin-block-start: 2.4rem;
   }
 
