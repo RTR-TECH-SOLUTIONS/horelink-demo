@@ -3,13 +3,28 @@ import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
-// Preview pentru client, publicat pe GitHub Pages sub /horelink-demo/.
-// La proiectul real (horelink.ro) se scot `site` și `base`, iar helperul din
-// src/lib/url.ts devine identitate — nu trebuie atins niciun link din pagini.
+// Doua tinte din acelasi cod:
+// - productie (implicit): https://horelink.ro, la radacina, indexabil;
+// - demo (DEPLOY_TARGET=demo, setat in workflow-ul GitHub Pages): sub /horelink-demo/, cu noindex.
+// Helperul din src/lib/url.ts prefixeaza base-ul, deci linkurile din pagini nu se ating.
+const DEMO = process.env.DEPLOY_TARGET === "demo";
+
+// Un singur fisier de font per familie, doar cu caracterele de care are nevoie site-ul
+// (ASCII, diacritice romanesti cu virgula si cu sedila, ghilimele, cateva litere Latin-1).
+// Altfel pagina romana descopera tarziu subsetul latin-ext si textul apare cu intarziere.
+const GLYPHS = [
+  ...Array.from({ length: 95 }, (_, i) => String.fromCharCode(32 + i)),
+  ..."ăâîșțĂÂÎȘȚşţŞŢ„”“‘’«»–—…·•©®™€°×→←↑↓àáäçèéêëìíïñòóôöùúûüÀÁÄÇÈÉÊËÌÍÏÑÒÓÔÖÙÚÛÜß",
+];
+
 export default defineConfig({
-  site: "https://rtr-tech-solutions.github.io",
-  base: "/horelink-demo",
+  site: DEMO ? "https://rtr-tech-solutions.github.io" : "https://horelink.ro",
+  base: DEMO ? "/horelink-demo" : "/",
   trailingSlash: "always",
+  // CSS-ul e mic (sub 10 KB): inline elimina cererile care blocheaza randarea
+  build: {
+    inlineStylesheets: "always",
+  },
   i18n: {
     locales: ["ro", "en"],
     defaultLocale: "ro",
@@ -26,8 +41,8 @@ export default defineConfig({
       cssVariable: "--font-archivo",
       weights: [500, 600, 700],
       styles: ["normal"],
-      subsets: ["latin", "latin-ext"],
       fallbacks: ["sans-serif"],
+      options: { experimental: { glyphs: GLYPHS } },
     },
     {
       provider: fontProviders.google(),
@@ -35,8 +50,8 @@ export default defineConfig({
       cssVariable: "--font-inter",
       weights: [400, 500, 600],
       styles: ["normal"],
-      subsets: ["latin", "latin-ext"],
       fallbacks: ["sans-serif"],
+      options: { experimental: { glyphs: GLYPHS } },
     },
   ],
   vite: {

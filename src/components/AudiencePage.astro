@@ -1,0 +1,433 @@
+---
+/**
+ * Pagina dedicata unei audiente: /pentru-companii/ si /pentru-personal/ (plus EN).
+ * Fiecare tinteste propriul set de keyworduri, dar refoloseste sectiunile de pe home
+ * (anuntul, evenimentele, descarcarea), ca site-ul sa ramana unitar.
+ */
+import Layout from "../layouts/Layout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import Phone from "./Phone.astro";
+import StoreBadges from "./StoreBadges.astro";
+import Anunt from "./Anunt.astro";
+import Evenimente from "./Evenimente.astro";
+import Descarca from "./Descarca.astro";
+import { t, base, AUDIENCE_ROUTES, type Audience, type Lang } from "../i18n";
+import { url } from "../lib/url";
+import { schemaHelpers } from "../lib/schema";
+
+interface Props {
+  lang: Lang;
+  audience: Audience;
+}
+
+const { lang, audience } = Astro.props;
+const d = t(lang);
+const a = d.audience[audience];
+const paths = AUDIENCE_ROUTES[audience];
+const steps = audience === "companii" ? d.cum.angajator : d.cum.personal;
+
+const visual =
+  audience === "companii"
+    ? {
+        photo: "angajatori",
+        screen: "screen-lista",
+        screenHeight: 1495,
+      }
+    : {
+        photo: "personal",
+        screen: "screen-detaliu",
+        screenHeight: 1706,
+      };
+
+const helpers = schemaHelpers(Astro.site ?? new URL("https://horelink.ro"));
+const schema = [...helpers.breadcrumb(lang, a.crumb, paths[lang]), helpers.faqPage(a.faq)];
+---
+
+<Layout lang={lang} title={a.title} description={a.description} paths={paths} schema={schema}>
+  <Header lang={lang} paths={paths} />
+
+  <main id="continut">
+    <section class="intro on-dark">
+      <div class="wrap intro-grid">
+        <div class="intro-copy">
+          <nav class="crumbs" aria-label={a.crumb}>
+            <a href={base(lang)}>{d.legal.home}</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{a.crumb}</span>
+          </nav>
+
+          <h1>{a.h1Pre}<span class="accent">{a.h1Accent}</span>{a.h1Post}</h1>
+          <p class="lede">{a.lede}</p>
+
+          <StoreBadges lang={lang} size="lg" />
+          <p class="fine">{a.fine}</p>
+        </div>
+
+        <div class="intro-visual">
+          <img
+            class="photo"
+            src={url(`/img/${visual.photo}-1000.webp`)}
+            srcset={`${url(`/img/${visual.photo}-640.webp`)} 640w, ${url(`/img/${visual.photo}-1000.webp`)} 1000w`}
+            sizes="(min-width: 960px) 45vw, 100vw"
+            alt={a.photoAlt}
+            width="1000"
+            height="664"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <Phone
+            src={url(`/app/${visual.screen}.webp`)}
+            srcSmall={url(`/app/${visual.screen}-600.webp`)}
+            sizes="(min-width: 960px) min(236px, 20vw), min(150px, 38vw)"
+            alt={a.phoneAlt}
+            width={840}
+            height={visual.screenHeight}
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section pasi">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2>{a.stepsTitle}</h2>
+          <p>{a.stepsIntro}</p>
+        </div>
+
+        <ol class="steps reveal">
+          {
+            steps.map((pas, i) => (
+              <li class="step">
+                <span class="num">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{pas.titlu}</h3>
+                <p>{pas.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="section roluri">
+      <div class="wrap split">
+        <div class="head reveal">
+          <h2>{a.rolesTitle}</h2>
+          <p>{a.rolesIntro}</p>
+        </div>
+
+        <dl class="roles reveal">
+          {
+            a.roles.map((rol) => (
+              <div class="role">
+                <dt>{rol.nume}</dt>
+                <dd>{rol.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    {audience === "personal" && <Anunt lang={lang} />}
+
+    <Evenimente lang={lang} title={a.eventsTitle} intro={a.eventsIntro} />
+
+    <section class="section faq">
+      <div class="wrap split">
+        <div class="head reveal">
+          <h2>{a.faqTitle}</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          {
+            a.faq.map((item) => (
+              <details>
+                <summary>
+                  <span>{item.q}</span>
+                  <span class="toggle" aria-hidden="true" />
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <Descarca lang={lang} />
+  </main>
+
+  <Footer lang={lang} />
+</Layout>
+
+<style>
+  /* --- intro --- */
+  .intro {
+    position: relative;
+    background: var(--color-ink);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .intro-grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    padding-block: calc(var(--header-h) + clamp(2.5rem, 1.5rem + 4vw, 5rem)) clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  }
+
+  @media (min-width: 960px) {
+    .intro-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 4rem;
+    }
+  }
+
+  .crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-end: 1.5rem;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .crumbs a {
+    color: rgba(255, 255, 255, 0.7);
+    text-underline-offset: 3px;
+  }
+
+  .crumbs a:hover {
+    color: #fff;
+  }
+
+  .intro h1 {
+    font-size: clamp(2.2rem, 1.5rem + 3vw, 3.6rem);
+    max-width: 16ch;
+  }
+
+  .intro .lede {
+    margin-block: 1.4rem 2.1rem;
+    max-width: 36rem;
+    font-size: clamp(1.02rem, 0.96rem + 0.3vw, 1.16rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .intro .fine {
+    margin-block-start: 1.1rem;
+    font-size: 0.89rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* telefonul iese peste coltul fotografiei, ca pe home */
+  .intro-visual {
+    position: relative;
+    padding-block-end: 2.5rem;
+  }
+
+  /* pe mobil fotografia e verticala, ca telefonul (captura inalta) sa incapa in dreptul ei */
+  .photo {
+    display: block;
+    width: calc(100% - 56px);
+    margin-inline-start: 56px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-card);
+  }
+
+  .intro-visual :global(.phone) {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    width: min(150px, 38vw);
+  }
+
+  @media (min-width: 960px) {
+    .photo {
+      width: calc(100% - 96px);
+      margin-inline-start: 96px;
+      aspect-ratio: 4 / 5;
+    }
+
+    .intro-visual :global(.phone) {
+      width: min(236px, 20vw);
+    }
+  }
+
+  /* --- titluri de sectiune --- */
+  .head {
+    max-width: 40rem;
+    margin-block-end: 2.75rem;
+  }
+
+  .head p {
+    margin-block-start: 1rem;
+    font-size: 1.06rem;
+    color: var(--color-slate);
+    max-width: 34rem;
+  }
+
+  /* --- pasi --- */
+  .steps {
+    display: grid;
+    gap: 2.5rem 2.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 820px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .step {
+    padding-block-start: 1.5rem;
+    border-block-start: 2px solid var(--color-graphite);
+  }
+
+  .num {
+    display: block;
+    margin-block-end: 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.86rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-brand);
+  }
+
+  .step h3 {
+    margin-block-end: 0.6rem;
+  }
+
+  .step p {
+    color: var(--color-slate);
+    line-height: 1.62;
+  }
+
+  /* --- titlu in stanga, continut in dreapta --- */
+  .roluri {
+    background: var(--color-paper-2);
+  }
+
+  @media (min-width: 960px) {
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .split .head {
+      position: sticky;
+      inset-block-start: calc(var(--header-h) + 2rem);
+      margin-block-end: 0;
+    }
+  }
+
+  /* --- pozitii: randuri de fisa, nu carduri --- */
+  .roles {
+    margin: 0;
+  }
+
+  .role {
+    display: grid;
+    gap: 0.3rem 2rem;
+    padding-block: 1.15rem;
+    border-block-start: 1px solid rgba(23, 23, 26, 0.14);
+  }
+
+  .role:last-child {
+    border-block-end: 1px solid rgba(23, 23, 26, 0.14);
+  }
+
+  @media (min-width: 640px) {
+    .role {
+      grid-template-columns: 13rem 1fr;
+      align-items: baseline;
+    }
+  }
+
+  .role dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.015em;
+    color: var(--color-graphite);
+  }
+
+  .role dd {
+    margin: 0;
+    color: var(--color-slate);
+  }
+
+  /* --- intrebari --- */
+  .faq {
+    background: var(--color-paper);
+    border-block-start: 1px solid var(--color-paper-2);
+  }
+
+  .faq-list details {
+    border-block-start: 1px solid rgba(23, 23, 26, 0.14);
+  }
+
+  .faq-list details:last-child {
+    border-block-end: 1px solid rgba(23, 23, 26, 0.14);
+  }
+
+  .faq-list summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+    letter-spacing: -0.015em;
+    color: var(--color-graphite);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toggle {
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+  }
+
+  .toggle::before,
+  .toggle::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 6px;
+    width: 14px;
+    height: 2px;
+    background: var(--color-brand);
+    transition: transform 200ms var(--ease);
+  }
+
+  .toggle::after {
+    transform: rotate(90deg);
+  }
+
+  details[open] .toggle::after {
+    transform: rotate(0deg);
+  }
+
+  .faq-list details p {
+    max-width: 40rem;
+    padding-block-end: 1.35rem;
+    color: var(--color-slate);
+    line-height: 1.65;
+  }
+</style>

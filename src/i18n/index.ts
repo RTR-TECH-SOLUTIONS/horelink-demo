@@ -34,6 +34,18 @@ export const LEGAL_ROUTES: Record<LegalPage, Record<Lang, string>> = {
 
 export const HOME_ROUTES: Record<Lang, string> = { ro: "/", en: "/en/" };
 
+/** Paginile pe audiente, fiecare tintita pe propriul set de keyworduri. */
+export type Audience = "companii" | "personal";
+
+export const AUDIENCE_ROUTES: Record<Audience, Record<Lang, string>> = {
+  companii: { ro: "/pentru-companii/", en: "/en/for-businesses/" },
+  personal: { ro: "/pentru-personal/", en: "/en/for-staff/" },
+};
+
+export function audienceHref(audience: Audience, lang: Lang): string {
+  return url(AUDIENCE_ROUTES[audience][lang]);
+}
+
 export function legalHref(page: LegalPage, lang: Lang): string {
   return url(LEGAL_ROUTES[page][lang]);
 }

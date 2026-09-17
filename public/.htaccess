@@ -1,0 +1,54 @@
+# horelink.ro - site static (Astro), servit de LiteSpeed/Apache la cyberfolks.
+# Pe demo-ul de pe GitHub Pages fisierul e ignorat.
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # http si www -> https://horelink.ro, intr-un singur redirect
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://horelink.ro%{REQUEST_URI} [L,R=301]
+
+  # paginile sunt foldere cu index.html: adresa canonica are slash final
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddCharset utf-8 .html .css .js .xml .txt
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript image/svg+xml
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # HSTS: se activeaza doar dupa ce certificatul SSL functioneaza pe horelink.ro si www.horelink.ro
+  # Header always set Strict-Transport-Security "max-age=31536000"
+
+  # HTML, sitemap, robots: se verifica la fiecare vizita, ca modificarile sa apara imediat
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # CSS, JS si fonturile din /_astro/ au hash in nume: se pot tine un an
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # imaginile din /img, /app, /og nu au hash: 30 de zile (la inlocuire, fisier cu nume nou)
+  <FilesMatch "\.(webp|avif|jpe?g|png|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
